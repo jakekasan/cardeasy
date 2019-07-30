@@ -1,0 +1,18 @@
+{
+  "name": "cardeasy",
+  "version": "0.0.1",
+  "description": "A website to help distributed teams send cards to each other.",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha ./test/*.test.js"
+  },
+  "author": "jake",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mocha": "^6.2.0",
+    "mongoose": "^5.6.7",
+    "sequelize": "^5.12.1"
+  }
+}
