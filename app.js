@@ -26,27 +26,27 @@ app.set("view engine", "ejs");
 // should I use a seperate router??
 app.get("/", (req, res, next) => {
     // home controller
-    homeController.index(req, res);
+    homeController.index({ req, res, next });
 });
 
 app.get("/faq", (req, res, next) => {
-    homeController.faq(req, res);
+    homeController.faq({ req, res, next });
 });
 
 app.get("/new", (req, res, next) => {
-    cardController.newCard(req, res);
+    cardController.newCard({ req, res, next });
 });
 
 app.post("/new", (req, res, next) => {
-    cardController.newCard_POST(req, res);
+    cardController.newCard_POST({ req, res, next });
 })
 
 app.get("/sign", (req, res) => {
-    cardController.signCard(req, res);
+    cardController.signCard({ req, res, next });
 });
 
 app.post("/sign", (req, res) => {
-    cardController.signCard_POST(req, res);
+    cardController.signCard_POST({ req, res, next });
 });
 
 // 404 catch-all
