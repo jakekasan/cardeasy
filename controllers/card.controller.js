@@ -30,8 +30,8 @@ module.exports = {
             })
     },
 
-    signCard: ({ req, res, next }) => {
-        // takes you to the signing form
+    signCard_validate: ({ req, res, next }) => {
+        // first validates the user
 
         User.validate(req)
             .then(() => {
@@ -41,8 +41,24 @@ module.exports = {
             })
             .catch(() => {
                 // invalid url, redirect to 404
+                next()
             })
         res.render("signCard");
+    },
+
+    signCard: ({ req, res, next}) => {
+        // check for valid cookie
+
+        if (req && req.cookie && req.cookie._id) {
+            User.getSession(req)
+                .then((data) => {
+                    res.render("signCard", {data: data});
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
+        // if no valid session cookie, redirect to signCard_validate
     },
 
     signCard_POST: ({ req, res, next }) => {
