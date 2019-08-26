@@ -56,7 +56,11 @@ module.exports = {
                 })
                 .catch((err) => {
                     console.log(err)
+
                 })
+        } else {
+            console.log("No cookie and stuff");
+            res.render("signCard");
         }
         // if no valid session cookie, redirect to signCard_validate
     },
