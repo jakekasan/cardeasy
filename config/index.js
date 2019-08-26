@@ -19,7 +19,7 @@ let config = {
                 storage: "./data.db"
             },
             Mongoose: {
-
+                uri: `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@ds157707.mlab.com:57707/cardeasy`
             }
         },
         constants: {
