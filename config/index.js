@@ -21,6 +21,9 @@ let config = {
             Mongoose: {
 
             }
+        },
+        constants: {
+            cookieExpireSeconds: 1000
         }
     }
 }
