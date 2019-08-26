@@ -46,6 +46,12 @@ module.exports = {
         res.render("signCard");
     },
 
+    signCard_validate_POST: ({ req, res, next}) => {
+        // handle post request
+
+        // if user credentials are valid, give them a cookie and redirect to signCard
+    },
+
     signCard: ({ req, res, next}) => {
         // check for valid cookie
 
@@ -56,13 +62,12 @@ module.exports = {
                 })
                 .catch((err) => {
                     console.log(err)
-
                 })
         } else {
-            console.log("No cookie and stuff");
-            res.render("signCard");
+            // if no valid session cookie, redirect to signCard_validate
+            res.redirect("signCard");
         }
-        // if no valid session cookie, redirect to signCard_validate
+        
     },
 
     signCard_POST: ({ req, res, next }) => {
