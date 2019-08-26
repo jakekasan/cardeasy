@@ -13,12 +13,17 @@ const express = require("express");
 // locals
 const cardController = require("./controllers/card.controller");
 const homeController = require("./controllers/home.controller");
+const userSessionMiddleware = require("./middleware/userSession.middleware");
 
 // init app
 const app = express();
 
 // middleware
 app.use(cookieParser());
+
+// session middleware
+app.use(userSessionMiddleware);
+
 app.use(bodyParser());
 
 app.set("view engine", "ejs");
@@ -41,11 +46,11 @@ app.post("/new", (req, res, next) => {
     cardController.newCard_POST({ req, res, next });
 })
 
-app.get("/sign", (req, res) => {
+app.get("/sign", (req, res, next) => {
     cardController.signCard({ req, res, next });
 });
 
-app.post("/sign", (req, res) => {
+app.post("/sign", (req, res, next) => {
     cardController.signCard_POST({ req, res, next });
 });
 
