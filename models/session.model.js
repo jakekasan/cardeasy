@@ -7,7 +7,7 @@
 const Sequelize = require("sequelize");
 
 // local
-const sequelize = require("./db.settings");
+const { sequelize } = require("./db.settings");
 const config = require("./../config/index")(process.env.MODE || "development");
 
 var Session = sequelize.define("session", {
@@ -33,11 +33,11 @@ module.exports = {
             Session.findOne({ where: {sessionID}})
                 .then((session) => {
                     let now = Date.now();
-                    let session = Date(session.datetimeCreated);
+                    let sessionDate = Date(session.datetimeCreated);
 
                     // if the time between the session's datetimeCreated and now is too long, delete the session
                     // and return an empty object
-                    if ( ( now - session ) <=  config.constants.cookieExpireSeconds) {
+                    if ( ( now - sessionDate ) <=  config.constants.cookieExpireSeconds) {
                         return resolve(session.get({ plain: true }))
                     } else {
                         session.destroy();
