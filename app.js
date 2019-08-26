@@ -5,10 +5,14 @@
     Entry point.
 */
 
+// load ENV variables
+require("dotenv").config();
+
 // globals
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const express = require("express");
+
 
 // locals
 const cardController = require("./controllers/card.controller");
