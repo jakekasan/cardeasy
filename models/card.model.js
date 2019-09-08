@@ -1,3 +1,16 @@
+/*
+
+
+*/
+
+
+// globals
+const mongoose = require("mongoose");
+
+// locals
+const { db } = require("./../config/index")(process.env.MODE || "development");
+
+
 let cardData = {
     _id:0,
     dateCreated: Date.now(),
@@ -26,6 +39,8 @@ let cardData = {
         }
     ]
 }
+
+mongoose.connect();
 
 module.exports = {
     create: (data) => {
