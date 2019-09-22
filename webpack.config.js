@@ -2,9 +2,9 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-    entry: path.join(__dirname, "./src/react/index.js"),
+    entry: path.join(__dirname, "./src/react/index.jsx"),
     output: {
-        filename: "output.js",
+        filename: "index.js",
         path: path.join(__dirname, "./public/html")
     },
     module: {
