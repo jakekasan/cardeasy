@@ -1,8 +1,8 @@
-import { Component, setState } from "react";
+import React, { Component } from "react";
 
 class Header extends Component {
-    constructor() {
-        this.state = setState();
+    constructor(props) {
+        super(props);
     }
 
     render() {
