@@ -26,6 +26,11 @@ module.exports = {
             }
         ]
     },
+    devServer: {
+        historyApiFallback: true,
+        publicPath: "/",
+        hot: true
+     },
     plugins: [
         new HtmlWebPackPlugin({
             template: "./src/react/index.html",
