@@ -7,20 +7,21 @@ import SignExistingCard from "./components/signExistingCard/main.jsx";
 import MakeNewCard from "./components/makeNewCard/main.jsx";
 import Home from "./components/home.jsx";
 import Nav from "./components/nav.jsx";
+import About from "./components/about.jsx";
 
 const App = () => {
     return (
         <section>
             <Header />
-            <Nav />
             <Router>
+                <Nav />
                 <Route exact path="/" component= { Home } />
                 <Route path="/sign" component = { SignExistingCard }/>
                 <Route path="/new" component = { MakeNewCard } />
+                <Route path="/about" component = { About } />
             </Router>
             <Footer />
         </section>
-            
     )
 };
 
