@@ -5,7 +5,8 @@ class Login extends Component {
         super(props);
         this.state = {
             username:"",
-            password:""
+            password:"",
+            wrongLogin: false
         }
 
         // housekeeping
@@ -14,26 +15,46 @@ class Login extends Component {
     }
 
     handleSubmit(event) {
+        event.persist();
         event.preventDefault();
         console.log(event);
+
+        let wrongLogin = this.state.wrongLogin;
+
+        if (this.state.username != "master"){
+            wrongLogin = true;
+        } else {
+            wrongLogin = false;
+        }
+
+        this.setState((state) => {
+            return {
+                username:"",
+                password:"",
+                wrongLogin: wrongLogin
+            }
+        });
+
+        if (!wrongLogin) {
+            this.props.onCorrectLogin(true);
+        }
+        
     }
 
     handleUsernameChange(e) {
-        console.log(e);
-        return
+        e.persist();
         this.setState(() => {
             return {
-                username: e.target.value
+                username: e && e.target && e.target.value || "ERROR"
             }
         })
     }
 
     handlePasswordChange(e) {
-        console.log(e);
-        return
+        e.persist();
         this.setState(() => {
             return {
-                password: e.target.value
+                password: e && e.target && e.target.value || "ERROR"
             }
         })
     }
@@ -41,6 +62,7 @@ class Login extends Component {
     render() {
         return (
             <form action="" onSubmit = { (event) => this.handleSubmit(event) }>
+                { (this.state.wrongLogin) ? <h1>WRONG LOGIIN!!!!!</h1> : null} 
                 <input type="text" name="username" id="username" value = {this.state.username} onChange = { this.handleUsernameChange } />
                 <input type="password" name="password" id="password" value = {this.state.password} onChange = { this.handlePasswordChange } />
                 <input type="submit" value="Log In"/>
