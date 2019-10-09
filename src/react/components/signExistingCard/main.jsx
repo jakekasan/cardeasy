@@ -9,6 +9,8 @@ class SignExistingCard extends Component {
         this.state = {
             userData: null
         };
+
+        this.handleCorrectLogin = this.handleCorrectLogin.bind(this);
     }
 
     componentDidMount() {
@@ -24,7 +26,7 @@ class SignExistingCard extends Component {
     render() {
         return (
             <div>
-                { (this.state && this.state.userData) ? <ChooseCard userData = {this.state.userData} /> : <Login onCorrectLogin = { (userData) => handleCorrectLogin(userData) }/> }
+                { (this.state && this.state.userData) ? <ChooseCard userData = {this.state.userData} /> : <Login onCorrectLogin = { (userData) => this.handleCorrectLogin(userData) }/> }
             </div>
         )
     }
