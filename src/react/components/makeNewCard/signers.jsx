@@ -6,9 +6,12 @@ class Signers extends Component {
         this.state = {
             recipients: {}
         }
+
+        this.activeInputFields = this.activeInputFields.bind(this);
+        this.onUpdateRecipientField = this.onUpdateRecipientField.bind(this);
     }
 
-    getNewRecipients(){
+    activeInputFields(){
         let recipientKeys = Object.keys(this.state.recipients);
 
         let recipientArray = recipientKeys.map(item => {
@@ -40,7 +43,7 @@ class Signers extends Component {
         });
     }
 
-    makeInputsLi(id){
+    makeInputsLi({id, name, email}){
         return (
             <li>
                 <input type="text" name="name" id="name" data-id={id} onChange = {this.onUpdateRecipientField} />
@@ -50,8 +53,13 @@ class Signers extends Component {
     }
 
     render() {
-        
-
+        let recipients = (Object.keys())
+            .map(item => {
+                return {id: item, ...this.state.recipients[item]}
+            })
+            .map(item => {
+                return this.makeInputsLi()
+            })
         return (
             <ul>
                 { recipients }
