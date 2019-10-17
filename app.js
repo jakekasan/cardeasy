@@ -12,58 +12,39 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const express = require("express");
-
+const path = require("path");
 
 // locals
-const cardController = require("./controllers/card.controller");
-const homeController = require("./controllers/home.controller");
-const userSessionMiddleware = require("./middleware/userSession.middleware");
+//const cardController = require("./controllers/card.controller");
+//const homeController = require("./controllers/home.controller");
+//const userSessionMiddleware = require("./middleware/userSession.middleware");
 
 // init app
 const app = express();
 
+// logging
+app.use((req, res, next) => {
+    let today = new Date();
+    console.log(`${today.toLocaleString()} => Received request to ${req.path}`);
+    next();
+})
+
+// set public directory
+app.use(express.static(path.join(__dirname, "public")));
+
 // middleware
 app.use(cookieParser());
 
-// session middleware
-app.use(userSessionMiddleware);
-
 app.use(bodyParser());
 
-app.set("view engine", "ejs");
-
-// should I use a seperate router??
-app.get("/", (req, res, next) => {
-    // home controller
-    homeController.index({ req, res, next });
+app.all("/",(req, res, next) => {
+    res.sendFile(__dirname + "/public/html/index.html");
 });
 
-app.get("/faq", (req, res, next) => {
-    homeController.faq({ req, res, next });
-});
-
-app.get("/new", (req, res, next) => {
-    cardController.newCard({ req, res, next });
-});
-
-app.post("/new", (req, res, next) => {
-    cardController.newCard_POST({ req, res, next });
-})
-
-app.get("/sign", (req, res, next) => {
-    cardController.signCard({ req, res, next });
-});
-
-app.post("/sign", (req, res, next) => {
-    cardController.signCard_POST({ req, res, next });
-});
-
-// 404 catch-all
-app.use((req, res, next) => {
-    res.status(404);
-    res.send("404 - not found");
+app.all("*", (req, res, next) => {
+    res.redirect("/");
 })
 
 app.listen(8080, () => {
     console.log("Listening on port 8080");
-})
+});
