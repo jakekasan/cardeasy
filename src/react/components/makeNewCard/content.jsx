@@ -7,7 +7,10 @@ class Content extends Component {
 
     render() {
         return (
-            <h1>Content</h1>
+            <section>
+                <input type="text" name="message" id="message"/>
+                <label htmlFor="message">Write your message:</label>
+            </section>
         )
     }
 }
