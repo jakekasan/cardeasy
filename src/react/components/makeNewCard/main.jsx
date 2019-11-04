@@ -11,8 +11,7 @@ class MakeNewCard extends Component {
 
     render() {
         return (
-            <section>
-                <h1>Make a new card!</h1>
+            <section id="newCard">
                 <Recipient />
                 <Content />
                 <Signers />
