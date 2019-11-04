@@ -8,12 +8,11 @@ class Recipient extends Component {
 
     render() {
         return (
-            <section>
-                <h3>Recipient</h3>
-                <input type="text" name="recipientName" id="recipientName"/>
+            <section id="recipientSection">
                 <label htmlFor="recipientName">Name of recipient:</label>
-                <input type="email" name="recipientEmail" id="recipientEmail"/>
+                <input type="text" name="recipientName" id="recipientName"/>
                 <label htmlFor="recipientEmail">Name of recipient:</label>
+                <input type="email" name="recipientEmail" id="recipientEmail"/>
             </section>
         )
     }
