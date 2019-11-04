@@ -8,8 +8,8 @@ class Content extends Component {
     render() {
         return (
             <section>
-                <input type="text" name="message" id="message"/>
                 <label htmlFor="message">Write your message:</label>
+                <input type="text" name="message" id="message"/>
             </section>
         )
     }
