@@ -91,9 +91,13 @@ class Signers extends Component {
         }))
 
         return (
-            <ul>
-                { signers }
-            </ul>
+            <section id="signersSection">
+                <label htmlFor="signersList">Signers:</label>
+                <ul id="signersList" name="signersList">
+                    { signers }
+                </ul>
+            </section>
+            
         )
     }
 }
