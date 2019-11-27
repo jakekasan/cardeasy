@@ -73,9 +73,23 @@ class MakeNewCard extends Component {
     
             if (data.signers.map((item) => item.name === "" || item.email === "").includes(true)) {
                 return reject({
-                    message: "A recipient is missing a name or email",
+                    message: "A signer is missing a name or email",
                     data:data
                 });
+            }
+
+            if (data.recipient.name === "" || data.recipient.email === "") {
+                return reject({
+                    message: "Need a name and email for the recipient",
+                    data: data
+                })
+            }
+
+            if (data.message === "") {
+                return reject({
+                    message: "Need to enter something into the message",
+                    data: data
+                })
             }
 
             return resolve({
@@ -83,7 +97,6 @@ class MakeNewCard extends Component {
                 data: data
             })
         })
-
     }
 
     onSubmitSuccess(data) {
