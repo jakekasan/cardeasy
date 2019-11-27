@@ -10,7 +10,11 @@ class MakeNewCard extends Component {
         super(props);
 
         this.state = {
-            formData: {}
+            formData: {},
+            message: {
+                isSuccess:false,
+                message:null
+            }
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,6 +29,24 @@ class MakeNewCard extends Component {
         console.log(this.state);
         // TODO: Should call out to API
         return
+    }
+
+    onSubmitSuccess(data) {
+        this.setState((state) => {
+            state.message = {
+                isSuccess: true,
+                message: "Card successfully submitted!"
+            }
+        })
+    }
+
+    onSubmitFailure(data) {
+        this.setState((state) => {
+            state.message = {
+                isSuccess: false,
+                message: data.message
+            }
+        })
     }
 
     handleChange(callBack) {
