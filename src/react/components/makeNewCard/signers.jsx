@@ -5,16 +5,7 @@ class Signers extends Component {
         super(props);
         this.state = {
             formData: {
-                signers: [
-                    {
-                        name: "Jake",
-                        email: "me@mail.com"
-                    },
-                    {
-                        name: "Carla",
-                        email: "carla@mail.com"
-                    }
-                ]
+                signers: []
             }
         }
 
