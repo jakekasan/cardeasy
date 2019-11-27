@@ -5,9 +5,14 @@ class Message extends Component {
         super(props);
     }
     render() { 
-        return (this.props.content.message !== null) ? (
+        console.log("Message props:");
+        console.log(this.props);
+        console.log("Will it render?");
+        console.log( (this.props.content && this.props.content.message && this.props.content.isSuccess) )
+        return (this.props.content && this.props.content.message) ? (
             <div>
-                <h1>{ this.props.content.message }</h1> 
+                <h1>{ (this.props && this.props.content && this.props.content.isSuccess) ? "Success!" : "Problem:" }</h1>
+                <p>{ this.props.content.message }</p>
             </div>
         ) : null
         
