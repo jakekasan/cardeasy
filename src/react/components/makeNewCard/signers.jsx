@@ -4,16 +4,18 @@ class Signers extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            signers: [
-                {
-                    name: "Jake",
-                    email: "me@mail.com"
-                },
-                {
-                    name: "Carla",
-                    email: "carla@mail.com"
-                }
-            ]
+            formData: {
+                signers: [
+                    {
+                        name: "Jake",
+                        email: "me@mail.com"
+                    },
+                    {
+                        name: "Carla",
+                        email: "carla@mail.com"
+                    }
+                ]
+            }
         }
 
         this.activeInputFields = this.activeInputFields.bind(this);
@@ -29,40 +31,67 @@ class Signers extends Component {
 
         let activeInputFields = this.state.signers.reduce((acc, cur) => {
             let { name, email } = cur;
-            if (name && name != "" && email && email != "") {
+            if (name && name != "" || email && email != "") {
                 return acc + 1
             } else {
                 return acc
             }
         }, 0);
 
-        console.log(activeInputFields);
+        console.log(`Active input fields: ${activeInputFields}`);
 
         return activeInputFields
     }
 
     onUpdateSignerField(e) {
         e.persist();
-        let id = e.target.dataset.id;
-        let name = e.target.name;
+        let test = "test";
+        let id = Number(e.target.dataset.id);
+        let fieldName = e.target.name;
+        let value = e.target.value;
 
-        let newData = {};
-        newData[name] = e.target.value;
+        console.log(`Attempting update id ${id} which is a ${fieldName} to ${value}`);
 
         this.setState((state) => {
-            let oldData = state.signers[id] || {};
-
-            let reconciled = {...oldData, ...newData};
-            if (reconciled.name != "" || reconciled.email != "") {
-                state.signers[id] = reconciled;
+            let formData = state.formData;
+            let signers = formData.signers;
+            if (signers.map((item, i) => i).includes(id) ) {
+                signers = signers.map((item, itemIndex) => {
+                    if (itemIndex == id) {
+                        console.log(`Changind id ${id} to ${value}`)
+                        item[fieldName] = value;
+                    }
+                    return item
+                })
+                // signers[id][fieldName] = value;
+                // console.log(`id ${id} is in data, updating...`);
+                // console.log(signers);
             } else {
-                state.signers.pop(id);
+                console.log(`id ${id} is not in data, adding...`);
+                console.log(signers);
+                let newObject = {
+                    name: "",
+                    email: ""
+                };
+
+                newObject[fieldName] = value;
+
+                signers[id] = newObject;
             }
 
-            console.log(state);
-            
+            signers = signers.filter((item) => {
+                return item.email !== "" || item.name !== ""
+            })
+
+            state.formData.signers = signers;
+
+            this.props.onChange((formData) => {
+                formData.signers = signers;
+                return formData
+            });
+
             return state
-        });
+        })
     }
 
     makeInputsLi({id, name, email}){
@@ -76,7 +105,7 @@ class Signers extends Component {
     }
 
     render() {
-        let signers = this.state.signers
+        let signers = this.state.formData.signers
             .map((item, id) => {
                 return {id: id, ...item}
             })
@@ -84,8 +113,10 @@ class Signers extends Component {
                 return this.makeInputsLi(item)
             })
 
+        console.log(`Number of signer elements: ${signers.length}`)
+
         signers.push(this.makeInputsLi({
-            id: this.activeInputFields() + 1,
+            id: signers.length,
             name: "",
             email: ""
         }))
