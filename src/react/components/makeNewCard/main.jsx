@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Recipient from "./recipient.jsx";
 import Content from "./content.jsx";
 import Signers from "./signers.jsx";
-import SubmitButton from "./submitButton.jsx";
+import Message from "./message.jsx";
 
 class MakeNewCard extends Component {
     constructor(props) {
@@ -28,7 +28,9 @@ class MakeNewCard extends Component {
 
         console.log(this.state);
         // TODO: Should call out to API
-        return
+        // For now just pretend all is well
+
+        return this.onSubmitSuccess({})
     }
 
     onSubmitSuccess(data) {
@@ -37,6 +39,7 @@ class MakeNewCard extends Component {
                 isSuccess: true,
                 message: "Card successfully submitted!"
             }
+            return state
         })
     }
 
@@ -59,6 +62,7 @@ class MakeNewCard extends Component {
     render() {
         return (
             <form id="newCard" onSubmit = {this.handleSubmit}>
+                <Message content = { this.state.message } />
                 <Recipient onChange = { this.handleChange } />
                 <Content onChange = { this.handleChange } />
                 <Signers onChange = { this.handleChange } />
