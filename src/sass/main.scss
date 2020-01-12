@@ -1,3 +1,25 @@
+body {
+    background-color: red;
+}
+
 .page {
     display: grid;
+
+    nav {
+        background-color: antiquewhite;
+    }
+
+    header {
+        background-color: beige;
+    }
+
+    .pageContent {
+        background-color: red;
+    }
+
+    footer {
+        background-color: aqua;
+    }
+
+
 }
