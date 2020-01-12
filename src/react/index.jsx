@@ -9,9 +9,11 @@ import Home from "./components/home.jsx";
 import Nav from "./components/nav.jsx";
 import About from "./components/about.jsx";
 
+import styles from "./../sass/main.scss";
+
 const App = () => {
     return (
-        <section>
+        <section className="page">
             <Header />
             <Router>
                 <Nav />
