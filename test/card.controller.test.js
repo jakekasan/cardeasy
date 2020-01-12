@@ -2,6 +2,10 @@ var assert = require("assert");
 
 
 describe("Card Controller", () => {
+
+    beforeEach(() => {
+
+    })
     
     describe("newCard", () => {
 
@@ -21,7 +25,7 @@ describe("Card Controller", () => {
             assert(true);
         });
 
-        it("Should ", () => {
+        it("Should call Card.create", () => {
             assert(true);
         })
     });
