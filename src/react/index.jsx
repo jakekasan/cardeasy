@@ -8,8 +8,9 @@ import MakeNewCard from "./components/makeNewCard/main.jsx";
 import Home from "./components/home.jsx";
 import Nav from "./components/nav.jsx";
 import About from "./components/about.jsx";
+import Test from "./components/test.jsx";
 
-import styles from "./../sass/main.scss";
+//import styles from "./../sass/main.scss";
 
 const App = () => {
     return (
@@ -20,7 +21,7 @@ const App = () => {
                 <Route exact path="/" component= { Home } />
                 <Route path="/sign" component = { SignExistingCard }/>
                 <Route path="/new" component = { MakeNewCard } />
-                <Route path="/about" component = { About } />
+                <Route path="/about" component = { Test } />
             </Router>
             <Footer />
         </section>
