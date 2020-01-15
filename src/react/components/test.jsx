@@ -1,22 +1,17 @@
 import React, { Component } from "react";
-import Form from "./form/main.jsx";
+import { Form } from "./form/main.jsx";
+import { ChooseCardDesign } from "./form/formParts/chooseCardDesign.jsx";
+import { ChooseCardOccasion } from "./form/formParts/chooseCardOccasion.jsx";
+import { WriteCardMessage } from "./form/formParts/writeCardMessage.jsx";
+import { RecipientDetails } from "./form/formParts/recipientDetails.jsx";
 
-function Test(props) {
-    const formData = [
-        0, 0, 0, 0
-    ]
-
+export const Test = (props) => {
     return (
-        <Form formData = {formData} />
+        <Form>
+            <ChooseCardOccasion />
+            <ChooseCardDesign />
+            <WriteCardMessage />
+            <RecipientDetails />
+        </Form>
     )
 }
-
-// class Test extends Component {
-//     render() {
-//         return (
-//             <Form />
-//         )
-//     }
-// }
-
-export default Test;
