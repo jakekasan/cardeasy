@@ -1,4 +1,6 @@
-export const CardOccasion = () => {
+import React from "react";
+
+export const CardOccasion = (props) => {
     return (
         <li>
             <p>Card Occasion</p>

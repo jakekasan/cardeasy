@@ -1,6 +1,9 @@
+import React from "react";
+
 export const AddCollaborators = ({
     values,
-    onChange
+    onChange,
+    stepNumber
 }) => {
     return (
         <section>

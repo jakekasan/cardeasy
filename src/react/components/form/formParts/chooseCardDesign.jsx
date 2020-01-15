@@ -1,4 +1,5 @@
-import CardDesign from "./cardDesign.jsx";
+import { CardDesign } from "./cardDesign.jsx";
+import React from "react";
 
 export const ChooseCardDesign = ({
     onChange,

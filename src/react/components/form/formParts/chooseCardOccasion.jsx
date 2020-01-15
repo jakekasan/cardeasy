@@ -1,4 +1,5 @@
-import CardOccasion from "./cardOccasion.jsx";
+import React from "react";
+import { CardOccasion } from "./cardOccasion.jsx";
 
 export const ChooseCardOccasion = ({
     onChange,

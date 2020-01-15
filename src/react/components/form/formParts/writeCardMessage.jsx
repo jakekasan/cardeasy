@@ -1,6 +1,9 @@
+import React from "react";
+
 export const WriteCardMessage = ({
     values,
-    onChange
+    onChange,
+    stepNumber
 }) => {
     return (
         <section>
