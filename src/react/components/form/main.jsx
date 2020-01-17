@@ -11,15 +11,15 @@ export const Form = (props) => {
         onSubmit
     } = useFormTools({
         cardType:"",
+        cardMessage:"",
         recipientName:"",
         recipientEmail:"",
         senderName:"",
         senderEmail:"",
-        senderMessage:"",
-        contributors:[
+        collaborators:[
             {
-                contributorName: "",
-                contributorEmail: ""
+                collaboratorName: "",
+                collaboratorEmail: ""
             }
         ]
     });
