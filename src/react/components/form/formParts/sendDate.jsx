@@ -19,8 +19,21 @@ function useSendDateHelpers(sendDateData = getDefaultData()) {
 
     const [ dateToSend, setDateToSend ] = useState(dateToSendCard);
 
+    function sendDateOnChange(event) {
+        const {
+            target: {
+                name,
+                value
+            }
+        } = event;
+
+        const formDate = Date.parse(value);
+
+        setDateToSend(formDate); // for now, later add validation
+    }
+
     return {
-        
+
     }
 }
 
