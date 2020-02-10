@@ -6,7 +6,10 @@ export const useFormTools = (initialState) => {
     function onChange(event) {
         event.preventDefault();
 
-        setValues({...values, [event.target.name]: event.target.value});
+        let newValueName = event.target.name;
+        let newValueValue = event.target.value;
+        
+        setValues({...values, [newValueName]: newValueValue });
     }
 
     function onSubmit(event) {
