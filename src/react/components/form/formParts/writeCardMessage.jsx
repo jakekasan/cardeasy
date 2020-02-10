@@ -8,7 +8,11 @@ export const WriteCardMessage = ({
     return (
         <section>
             <h5>Step {stepNumber}: Write your message</h5>
-            <textarea></textarea>
+        <textarea
+            name = "cardMessage"
+            onChange = { onChange }
+            value = { values.cardMessage }
+            />
         </section>
     )
 }
