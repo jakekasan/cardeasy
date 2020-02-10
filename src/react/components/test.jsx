@@ -5,6 +5,7 @@ import { ChooseCardOccasion } from "./form/formParts/chooseCardOccasion.jsx";
 import { WriteCardMessage } from "./form/formParts/writeCardMessage.jsx";
 import { RecipientDetails } from "./form/formParts/recipientDetails.jsx";
 import { Collaborators } from "./form/formParts/collaborators/collaborators.jsx";
+import { RecipientAndSender } from "./form/formParts/recipientAndSender.jsx";
 
 export const Test = (props) => {
     return (
@@ -12,6 +13,7 @@ export const Test = (props) => {
             <ChooseCardOccasion />
             <ChooseCardDesign />
             <WriteCardMessage />
+            <RecipientAndSender />
             <Collaborators />
         </Form>
     )
