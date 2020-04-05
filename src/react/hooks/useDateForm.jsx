@@ -29,19 +29,35 @@ export const useDateForm = () => {
     const [ date, setDate ] = setState(new Date());
 
     const datePartOnChange = (event) => {
+        let name = event.target.name;
+        let value = event.target.value.toInt();
+        value = (zeroDelimDateParts.includes(value)) ? value - 1 : value;
         let dateParts = {
             ...destructureDate(date),
-            ...{[event.target.name]: event.target.value}
+            ...{
+                [name]: value
+            }
         };
 
         return setDate(new Date(
-            Object.values(
+            ...Object.values(
                 destructureDateLike(dateParts)
             )
         ));
     }
 
+    const datePartNames = ["year","month","day","hour","minute"]
+
+    const datePartValues = destructureDate(date);
+
     return {
-        datePartOnChange
+        dateParts = datePartNames.map(name => {
+            return {
+                name: name,
+                value: datePartValues[name],
+                label: name.toUpperCase(),
+                onChange: datePartOnChange
+            }
+        })
     }
 }
