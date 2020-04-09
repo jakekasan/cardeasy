@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { LabeledInput } from "./labeledInput.jsx";
-import { PersonDetails } from "../../../partials/PersonDetails.jsx";
+import { PersonDetails } from "./../../../partials/PersonDetails.jsx";
+import { SectionTitle } from "./../../../partials/SectionTitle.jsx";
 
-export const RecipientAndSender = ({
+export const SetRecipientAndSender = ({
     onChange,
-    values
+    values,
+    stepNumber
 }) => {
 
     const { sender, recipient } = values;
