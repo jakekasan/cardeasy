@@ -1,11 +1,30 @@
-import react, { Component } from "react";
-import { LabeledInput } from "../formParts/labeledInput";
+import React from "react";
+import { useDateForm } from "../../hooks/useDateForm";
+import { LabeledInput } from "../../../partials/LabeledInput";
 
-export const SetDate = () => {
+export default SetDate = ({
+    onChange,
+    values
+}) => {
 
+    const { dateParts } = useDateForm(values.sendDate);
+
+    const renderDatePart = (datePart) => {
+        return (
+            <LabeledInput
+                type = "number"
+                name = { datePart.name }
+                value = { datePart.value }
+                onChange = { datePart.onChange }
+                label = { datePart.label }
+            />
+        )
+    }
     return (
-        <span>
-            <LabeledInput />
-        </span>
+        <section>
+            {
+                dateParts.map(datePart => renderDatePart(datePart))
+            }
+        </section>    
     )
 }
