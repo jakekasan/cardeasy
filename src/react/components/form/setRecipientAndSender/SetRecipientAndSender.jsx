@@ -18,6 +18,11 @@ export const RecipientAndSender = ({
 
     return (
         <section>
+            <SectionTitle
+                title = { "Tell us some details about you and who we're sending the card to!"}
+                stepNumber = { stepNumber }
+            />
+
             <PersonDetails
                 values = { sender }
                 onChange = { onChangeFactory("sender") }
