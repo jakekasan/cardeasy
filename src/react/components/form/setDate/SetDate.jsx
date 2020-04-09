@@ -1,15 +1,15 @@
 import React from "react";
-import { useDateForm } from "../../hooks/useDateForm";
-import { LabeledInput } from "../../../partials/LabeledInput";
+import { LabeledInput } from "../../../partials/LabeledInput.jsx";
+import { useDateForm } from "./../../../hooks/useDateForm.jsx";
 
-export default SetDate = ({
+export const SetDate = ({
     onChange,
     values
 }) => {
 
     const { dateParts } = useDateForm(values.sendDate);
 
-    const renderDatePart = (datePart) => {
+    const renderDatePart = (datePart, i) => {
         return (
             <LabeledInput
                 type = "number"
@@ -17,13 +17,14 @@ export default SetDate = ({
                 value = { datePart.value }
                 onChange = { datePart.onChange }
                 label = { datePart.label }
+                key = { i }
             />
         )
     }
     return (
         <section>
             {
-                dateParts.map(datePart => renderDatePart(datePart))
+                dateParts.map((datePart, i) => renderDatePart(datePart, i))
             }
         </section>    
     )
