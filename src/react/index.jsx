@@ -9,6 +9,7 @@ import Home from "./components/home.jsx";
 import Nav from "./components/nav.jsx";
 import About from "./components/about.jsx";
 import { Test } from "./components/test.jsx";
+import { NewCardForm } from "./components/form/NewCardForm.jsx";
 
 //import styles from "./../sass/main.scss";
 
@@ -20,7 +21,7 @@ const App = () => {
                 <Nav />
                 <Route exact path="/" component= { Home } />
                 <Route path="/sign" component = { SignExistingCard }/>
-                <Route path="/new" component = { MakeNewCard } />
+                <Route path="/new" component = { NewCardForm } />
                 <Route path="/about" component = { Test } />
             </Router>
             <Footer />
