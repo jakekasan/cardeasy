@@ -40,7 +40,7 @@ export const CollaboratorList = ({
             
             const newValues = fixedCollaborators;
 
-            newValues[index][event.target.name] = event.target.value
+            newValues[index][event.target.name] = event.target.value;
 
             return onChange({
                 preventDefault: () => {},
@@ -53,8 +53,6 @@ export const CollaboratorList = ({
 
         return onCollabChange
     }
-
-    
 
     return (
         <ul>
