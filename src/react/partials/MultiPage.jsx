@@ -1,9 +1,9 @@
 import React, { useReducer } from "react";
 
 export const MultiPage = (
-    props,
     {
-        children
+        children,
+        ...props
     }
 ) => {
     function pageReducer(pageNumber, action) {
