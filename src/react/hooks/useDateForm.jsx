@@ -24,9 +24,9 @@ function destructureDateLike(dateLike) {
     }
 }
 
-export const useDateForm = () => {
+export const useDateForm = (initialDate) => {
 
-    const [ date, setDate ] = setState(new Date());
+    const [ date, setDate ] = setState(initialDate);
 
     const datePartOnChange = (event) => {
         let name = event.target.name;
