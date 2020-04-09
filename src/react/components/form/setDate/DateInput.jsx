@@ -1,6 +1,6 @@
 import React from "react";
-import { useDateForm } from "../../../hooks/useDateForm";
-import { LabeledInput } from "../../../partials/LabeledInput";
+import { useDateForm } from "../../../hooks/useDateForm.jsx";
+import { LabeledInput } from "../../../partials/LabeledInput.jsx";
 
 export default DateInput = () => {
 

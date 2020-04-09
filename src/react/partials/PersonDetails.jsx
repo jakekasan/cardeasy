@@ -1,5 +1,5 @@
 import React from "react";
-import LabeledInput from "./LabeledInput.jsx";
+import { LabeledInput } from "./LabeledInput.jsx";
 
 const DEFAULT_NAME_LABEL = "Name"
 const DEFAULT_EMAIL_LABEL = "Email"

@@ -1,8 +1,7 @@
 import React from "react";
-import { CollaboratorDetails } from "./collaboratorDetails.jsx";
-import { CollaboratorList } from "./../collaboratorList.jsx";
+import { CollaboratorList } from "./collaboratorList.jsx";
 
-export const Collaborators = ({
+export const SetCollaborators = ({
     onChange,
     values,
     stepNumber
@@ -43,24 +42,6 @@ export const Collaborators = ({
 
         return onChange(collaboratorsEvent)
     }
-
-    const collaborators = values.collaborators.map((collaborator, i) => {
-        return <CollaboratorDetails
-            name = {{
-                elementName: "collaboratorName",
-                elementLabel: "Collaborator's Name",
-                elementValue: collaborator.name
-            }}
-            email = {{
-                elementName: "collaboratorEmail",
-                elementLabel: "Collaborator's Email",
-                elementValue: collaborator.email
-            }}
-            onChange = { collaboratorOnChange }
-            type = "collaborator"
-            key = { i + 2 }
-        />
-    })
 
     return (
         <section>

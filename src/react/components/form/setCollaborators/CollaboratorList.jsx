@@ -1,5 +1,5 @@
 import React from "react";
-import { LabeledInput } from "./labeledInput.jsx";
+import { LabeledInput } from "./../../../partials/LabeledInput.jsx";
 
 function fixCollaborators(collabs) {
     let fixedCollaborators = collabs.filter(item => {
