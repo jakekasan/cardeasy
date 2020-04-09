@@ -5,10 +5,8 @@ function destructureDate(date) {
         year: date.getFullYear(),
         month: date.getMonth(),
         day: date.getDate(),
-        hour: date.getHour(),
-        minute: date.getMinute(),
-        second: date.getSecond(),
-        milisecond: date.getMilisecond()
+        hour: date.getHours(),
+        minute: date.getMinutes(),
     }
 }
 
@@ -19,14 +17,12 @@ function destructureDateLike(dateLike) {
         day: dateLike.day,
         hour: dateLike.hour,
         minute: dateLike.minute,
-        second: dateLike.second,
-        milisecond: dateLike.milisecond
     }
 }
 
 export const useDateForm = (initialDate) => {
 
-    const [ date, setDate ] = setState(initialDate);
+    const [ date, setDate ] = useState(initialDate);
 
     const datePartOnChange = (event) => {
         let name = event.target.name;
@@ -51,7 +47,7 @@ export const useDateForm = (initialDate) => {
     const datePartValues = destructureDate(date);
 
     return {
-        dateParts = datePartNames.map(name => {
+        dateParts: datePartNames.map(name => {
             return {
                 name: name,
                 value: datePartValues[name],
