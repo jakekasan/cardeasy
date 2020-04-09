@@ -21,7 +21,7 @@ export const MultiPage = (
 
     return (
         <section>
-            { React.cloneElement(children[currentStep], props) }
+            { React.cloneElement(children[currentStep], { currentStep, ...props }) }
             <button onClick = {() => dispatch({ type: "sub" })} disabled = { currentStep < 0}>Back</button>
             <button onClick = {() => dispatch({ type: "add" })} disabled = { currentStep === children.length - 1}>Next</button>
         </section>
