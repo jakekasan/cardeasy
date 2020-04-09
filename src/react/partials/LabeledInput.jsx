@@ -8,18 +8,16 @@ export const LabeledInput = ({
     value
 }) => {
     return (
-        <div>
+        <>
             <label
                 htmlFor = { name }
-            >
-                { label }
-            </label>
+            >{ label }</label>
             <input
                 name = { name }
                 type = { type }
                 value = { value }
                 onChange = { onChange }
                 />
-        </div>
+        </>
     )
 }
