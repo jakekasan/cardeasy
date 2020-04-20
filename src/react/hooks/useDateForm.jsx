@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+const zeroDelimDateParts = ["month"]
+
 function destructureDate(date) {
     return {
         year: date.getFullYear(),
@@ -26,8 +28,9 @@ export const useDateForm = (initialDate) => {
 
     const datePartOnChange = (event) => {
         let name = event.target.name;
-        let value = event.target.value.toInt();
-        value = (zeroDelimDateParts.includes(value)) ? value - 1 : value;
+        let value = event.target.value;
+        console.log("datePartOnChange:", name, value)
+        value = (zeroDelimDateParts.includes(name)) ? value - 1 : value;
         let dateParts = {
             ...destructureDate(date),
             ...{
@@ -50,7 +53,7 @@ export const useDateForm = (initialDate) => {
         dateParts: datePartNames.map(name => {
             return {
                 name: name,
-                value: datePartValues[name],
+                value: (zeroDelimDateParts.includes(name)) ? (datePartValues[name]) + 1 : datePartValues[name],
                 label: name.toUpperCase(),
                 onChange: datePartOnChange
             }
