@@ -11,17 +11,19 @@ export const NewCardForm = ({
     ...props
 }) => {
 
-    const { formData, updateFormData } = useCardFormValidation({
-        collaborators: [],
-        recipient: { name: "", email: ""},
-        sender: { name: "", email: "" },
-        message: "",
-        cardOccasion: "",
-        cardDesign: "",
-        sendDate: new Date()
+    const { formData, updateFormData, onSubmit } = useCardFormValidation({
+        defaultFormData: {
+            collaborators: [],
+            recipient: { name: "", email: ""},
+            sender: { name: "", email: "" },
+            message: "",
+            cardOccasion: "",
+            cardDesign: "",
+            sendDate: new Date(),
+        }
     });
 
-    const updatedProps = { ...props, values: formData, onChange: updateFormData };
+    const updatedProps = { ...props, values: formData, onChange: updateFormData, onSubmit: onSubmit };
 
     return (
         <MultiPage { ...updatedProps }>
