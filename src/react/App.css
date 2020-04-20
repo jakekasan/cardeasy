@@ -1,0 +1,40 @@
+html {
+    background-color: antiquewhite;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 10% 10% auto 10%;
+}
+
+.formParent {
+    display:grid;
+    max-width: 90%;
+    margin: 0 auto;
+    grid-template-areas:
+        "form-part form-part"
+        "form-back form-next"
+    ;
+}
+
+.formParent article {
+    grid-area: "form-part";
+}
+
+.formParent .backButton {
+    grid-area: "form-back";
+}
+
+.formParent .nextButton {
+    grid-area: "form-next";
+}
+
+header {
+    width: 100%;
+}
+
