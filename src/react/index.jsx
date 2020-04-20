@@ -13,9 +13,11 @@ import { NewCardForm } from "./components/form/NewCardForm.jsx";
 
 //import styles from "./../sass/main.scss";
 
+import "./App.css";
+
 const App = () => {
     return (
-        <section className="page">
+        <>
             <Header />
             <Router>
                 <Nav />
@@ -25,8 +27,8 @@ const App = () => {
                 <Route path="/about" component = { Test } />
             </Router>
             <Footer />
-        </section>
+        </>
     )
 };
 
-ReactDOM.render(<App />, document.querySelector("#mainApp"));
+ReactDOM.render(<App />, document.querySelector("body"));
