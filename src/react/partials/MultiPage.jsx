@@ -3,27 +3,66 @@ import React, { useReducer } from "react";
 export const MultiPage = (
     {
         children,
+        onSubmit,
         ...props
     }
 ) => {
+    const formSubmit = () => {
+        console.log("formSubmit");
+        onSubmit();
+    }
+
     function pageReducer(pageNumber, action) {
         switch (action.type) {
-            case "add":
+            case "next":
+                console.log("pageReducer back");
+                console.log(pageNumber);
                 return Math.min(pageNumber + 1, children.length - 1)
-            case "sub":
+            case "next":
+                console.log("pageReducer next");
+                console.log(pageNumber);
                 return Math.max(pageNumber - 1, 0)
+            case "submit":
+                console.log("pageReducer submit")
+                formSubmit();
+                return 0
             default:
+                console.log("pageReducer default");
                 throw new Error()
         }
     }
 
     const [ currentStep, dispatch ] = useReducer(pageReducer, 0);
 
+    const renderBackButton = () => {
+        const isDisabled = currentStep < 1;
+
+        return (
+            <button onClick = {() => dispatch({ type: "back" })} disabled = { isDisabled }>Back</button>
+        )
+    }
+
+    const renderNextButton = () => {
+        const isOnLastPart = currentStep === (children.length - 1);
+
+        const buttonText = (isOnLastPart) ? "Submit" : "Next";
+
+        const dispatchEventType = (isOnLastPart) ? "submit" : "next";
+
+        const buttonOnClick = () => dispatch({type: dispatchEventType})
+
+        return (
+            <button onClick = { buttonOnClick }>{ buttonText }</button>
+        )
+    }
+
     return (
-        <section>
-            { React.cloneElement(children[currentStep], { currentStep, ...props }) }
-            <button onClick = {() => dispatch({ type: "sub" })} disabled = { currentStep < 0}>Back</button>
-            <button onClick = {() => dispatch({ type: "add" })} disabled = { currentStep === children.length - 1}>Next</button>
+        <section className = "formParent">
+            { React.cloneElement(children[currentStep], { stepNumber:currentStep + 1, ...props }) }
+            
+            { renderBackButton() }
+            { renderNextButton() }
+            
         </section>
     )
 }
