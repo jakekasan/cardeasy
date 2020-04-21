@@ -15,11 +15,11 @@ export const MultiPage = (
     function pageReducer(pageNumber, action) {
         switch (action.type) {
             case "next":
-                console.log("pageReducer back");
+                console.log("pageReducer next");
                 console.log(pageNumber);
                 return Math.min(pageNumber + 1, children.length - 1)
-            case "next":
-                console.log("pageReducer next");
+            case "back":
+                console.log("pageReducer back");
                 console.log(pageNumber);
                 return Math.max(pageNumber - 1, 0)
             case "submit":
@@ -38,7 +38,7 @@ export const MultiPage = (
         const isDisabled = currentStep < 1;
 
         return (
-            <button onClick = {() => dispatch({ type: "back" })} disabled = { isDisabled }>Back</button>
+            <button className="backButton" onClick = {() => dispatch({ type: "back" })} disabled = { isDisabled }>Back</button>
         )
     }
 
@@ -52,17 +52,15 @@ export const MultiPage = (
         const buttonOnClick = () => dispatch({type: dispatchEventType})
 
         return (
-            <button onClick = { buttonOnClick }>{ buttonText }</button>
+            <button className="nextButton" onClick = { buttonOnClick }>{ buttonText }</button>
         )
     }
 
     return (
-        <section className = "formParent">
+        <main className = "formParent">
             { React.cloneElement(children[currentStep], { stepNumber:currentStep + 1, ...props }) }
-            
             { renderBackButton() }
             { renderNextButton() }
-            
-        </section>
+        </main>
     )
 }
