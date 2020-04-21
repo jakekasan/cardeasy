@@ -1,12 +1,18 @@
 import React from "react";
+import { SectionTitle } from "./SectionTitle.jsx";
 
-export const Page = ({children:[content], title, partNumber, ...props}) => {
+export const Page = ({children, title, stepNumber, ...props}) => {
     console.log("Rendering page");
-    console.log(partNumber);
+    console.log(stepNumber);
     return (
         <>
-            <h5>Part {partNumber}: { title }</h5>
-            { React.cloneElement(content, props) }
+            <SectionTitle
+                title={title}
+                stepNumber={stepNumber}
+            />
+            <section>
+            { children }
+            </section>
         </>
     )
 }
