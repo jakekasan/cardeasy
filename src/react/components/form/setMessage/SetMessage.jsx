@@ -1,5 +1,6 @@
 import React from "react";
 import { SectionTitle } from "../../../partials/SectionTitle.jsx";
+import { Page } from "./../../../partials/Page.jsx";
 
 export const SetMessage = ({
     stepNumber,
@@ -12,12 +13,11 @@ export const SetMessage = ({
         return onChange({ [name]: value })
     }
     return (
-        <section>
-            <SectionTitle
-                stepNumber = { stepNumber }
-                title = { "Write a special message on the card!" }
-                />
+        <Page
+            stepNumber = { stepNumber }
+            title = { "Write a special message on the card!" }
+        >
             <input type="text" name="message" value={ values.message } onChange={ messageOnChange }/>
-        </section>
+        </Page>
     )
 }

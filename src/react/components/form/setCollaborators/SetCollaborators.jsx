@@ -1,5 +1,6 @@
 import React from "react";
 import { CollaboratorList } from "./collaboratorList.jsx";
+import { Page } from "./../../../partials/Page.jsx";
 
 export const SetCollaborators = ({
     onChange,
@@ -44,13 +45,15 @@ export const SetCollaborators = ({
     }
 
     return (
-        <section>
-            <h5>Step {stepNumber}: Recipient Details</h5>
+        <Page
+            stepNumber = { stepNumber }
+            title = "Enter collaborator details"
+        >
             <CollaboratorList
                 values = { values }
                 onChange = { onChange }
             />
             
-        </section>
+        </Page>
     )
 }

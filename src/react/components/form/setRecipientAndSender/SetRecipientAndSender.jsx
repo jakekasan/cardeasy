@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { PersonDetails } from "./../../../partials/PersonDetails.jsx";
 import { SectionTitle } from "./../../../partials/SectionTitle.jsx";
+import { Page } from "./../../../partials/Page.jsx";
 
 export const SetRecipientAndSender = ({
     onChange,
@@ -18,11 +19,14 @@ export const SetRecipientAndSender = ({
     }
 
     return (
-        <section>
-            <SectionTitle
+        <Page
+            title = { "Tell us some details about you and who we're sending the card to!"}
+            stepNumber = { stepNumber }
+        >
+            {/* <SectionTitle
                 title = { "Tell us some details about you and who we're sending the card to!"}
                 stepNumber = { stepNumber }
-            />
+            /> */}
 
             <PersonDetails
                 values = { sender }
@@ -36,6 +40,6 @@ export const SetRecipientAndSender = ({
                 nameLabel = { "Recipient's name" }
                 emailLabel = { "Recipient's email" }
                 />
-        </section>
+        </Page>
     )
 }

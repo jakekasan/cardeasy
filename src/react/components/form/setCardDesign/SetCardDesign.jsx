@@ -8,17 +8,20 @@ export const ChooseCardDesign = ({
     stepNumber
 }) => {
     return (
-        <section>
-            <SectionTitle
+        <Page
+            stepNumber = { stepNumber }
+            title = { "Choose a card design!" }
+        >
+            {/* <SectionTitle
                 stepNumber = { stepNumber }
                 title = { "Choose a card design!" }
-                />
+                /> */}
             <ul>
                 <CardDesign />
                 <CardDesign />
                 <CardDesign />
                 <CardDesign />
             </ul>
-        </section>
+        </Page>
     )
 }

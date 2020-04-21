@@ -1,5 +1,6 @@
 import React from "react";
 import { CardOccasion } from "./CardOccasion.jsx";
+import { Page } from "./../../../partials/Page.jsx";
 
 export const SetCardOccasion = ({
     onChange,
@@ -7,14 +8,16 @@ export const SetCardOccasion = ({
     stepNumber
 }) => {
     return (
-        <section>
-            <h5>Step { stepNumber }: Choose an occasion for your card</h5>
+        <Page
+            title = "Choose an occasion for your card"
+            stepNumber = { stepNumber }
+        >
             <ul>
                 <CardOccasion />
                 <CardOccasion />
                 <CardOccasion />
                 <CardOccasion />
             </ul>
-        </section>
+        </Page>
     )
 }

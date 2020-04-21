@@ -1,10 +1,12 @@
 import React from "react";
 import { LabeledInput } from "../../../partials/LabeledInput.jsx";
 import { useDateForm } from "./../../../hooks/useDateForm.jsx";
+import { Page } from "./../../../partials/Page.jsx";
 
 export const SetDate = ({
     onChange,
-    values
+    values,
+    stepNumber
 }) => {
 
     const { dateParts } = useDateForm(values.sendDate);
@@ -22,10 +24,13 @@ export const SetDate = ({
         )
     }
     return (
-        <section>
+        <Page
+            stepNumber = {stepNumber}
+            title = "When would you like this card to be delivered?"
+        >
             {
                 dateParts.map((datePart, i) => renderDatePart(datePart, i))
             }
-        </section>    
+        </Page>    
     )
 }
