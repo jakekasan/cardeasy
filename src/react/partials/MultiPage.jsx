@@ -38,7 +38,7 @@ export const MultiPage = (
         const isDisabled = currentStep < 1;
 
         return (
-            <button className="backButton" onClick = {() => dispatch({ type: "back" })} disabled = { isDisabled }>Back</button>
+            <button className="backButton buttonStyle" onClick = {() => dispatch({ type: "back" })} disabled = { isDisabled }>Back</button>
         )
     }
 
@@ -52,7 +52,7 @@ export const MultiPage = (
         const buttonOnClick = () => dispatch({type: dispatchEventType})
 
         return (
-            <button className="nextButton" onClick = { buttonOnClick }>{ buttonText }</button>
+            <button className="nextButton buttonStyle" onClick = { buttonOnClick }>{ buttonText }</button>
         )
     }
 
