@@ -20,7 +20,7 @@ export const SetRecipientAndSender = ({
 
     return (
         <Page
-            title = { "Tell us some details about you and who we're sending the card to!"}
+            title = { "Tell us about you and who we're sending the card to!"}
             stepNumber = { stepNumber }
         >
             {/* <SectionTitle
