@@ -8,7 +8,7 @@ class Footer extends Component {
     render() {
         return (
             <footer>
-                <h1>This is a footer!!</h1>
+                <h5>Mosbius Designs &copy; 2020</h5>
             </footer>
         )
     }
