@@ -82,6 +82,25 @@ nav a {
     grid-area: content;
 }
 
+ul.CardOccasion {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li.CardOccasion {
+    text-decoration: none;
+    list-style: none;
+    border: 2px solid cornflowerblue;
+    margin: 5px;
+    padding: 0px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+}
+
 .buttonStyle {
     background-color: cornflowerblue;
     display: block;
