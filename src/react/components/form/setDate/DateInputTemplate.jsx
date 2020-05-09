@@ -5,7 +5,7 @@ export const DateInputTemplate = (props) => {
     const { dateInputs, timeInputs } = props;
 
     const dateMessage = "Enter the date that you'd like the card to be sent at:";
-    const timeMessage = "and the time:"
+    const timeMessage = "And the time:"
 
     return (
         <>
