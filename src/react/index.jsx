@@ -17,7 +17,7 @@ import "./App.css";
 
 const App = () => {
     return (
-        <div id="App">
+        <>
             <Header />
             <Router>
                 <Nav />
@@ -27,8 +27,8 @@ const App = () => {
                 <Route path="/about" component = { Test } />
             </Router>
             <Footer />
-        </div>
+        </>
     )
 };
 
-ReactDOM.render(<App />, document.querySelector("body"));
+ReactDOM.render(<App />, document.querySelector("#App"));
