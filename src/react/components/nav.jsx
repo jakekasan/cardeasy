@@ -11,16 +11,16 @@ class Nav extends Component {
             <nav>
                 <ul>
                     <li>
-                        <Link className="buttonStyle" to = "/" >Home</Link>
+                        <Link className="underlined" to = "/" >Home</Link>
                     </li>
                     <li>
-                        <Link className="buttonStyle" to = "/new" >Start</Link>
+                        <Link className="underlined" to = "/new" >Start</Link>
                     </li>
                     <li>
-                        <Link className="buttonStyle" to = "/sign" >Sign</Link>
+                        <Link className="underlined" to = "/sign" >Sign</Link>
                     </li>
                     <li>
-                        <Link className="buttonStyle" to = "/about" >About</Link>
+                        <Link className="underlined" to = "/about" >About</Link>
                     </li>
                 </ul>
             </nav>
