@@ -12,7 +12,7 @@ export const SetCardOccasion = ({
             title = "Choose an occasion for your card"
             stepNumber = { stepNumber }
         >
-            <ul>
+            <ul className = "CardOccasion">
                 <CardOccasion />
                 <CardOccasion />
                 <CardOccasion />
