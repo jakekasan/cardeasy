@@ -4,12 +4,12 @@ html * {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-html, body {
+html, .App {
     padding: 0;
     margin: 0;
 }
 
-body {
+#App {
     box-sizing: border-box;
     display: grid;
     width: 100%;
@@ -23,7 +23,7 @@ body {
     ;
 }
 
-body.home {
+#App.home {
     grid-auto-rows: 1fr 3fr 1fr;
     grid-template-columns: 1ft;
     grid-template-areas:
@@ -32,11 +32,11 @@ body.home {
         "footer"
 }
 
-body.home main {
+#App.home main {
     display: none;
 }
 
-body header {
+#App header {
     grid-area: header;
 }
 
@@ -44,7 +44,7 @@ header h1 {
     font-size: 3rem;
 }
 
-body nav {
+#App nav {
     grid-area: nav;
 }
 
@@ -81,11 +81,11 @@ nav a {
     width: 100%;
 }
 
-body footer {
+#App footer {
     grid-area: footer;
 }
 
-body main {
+#App main {
     grid-area: content;
 }
 
