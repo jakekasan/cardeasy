@@ -17,7 +17,7 @@ export const PersonDetails = ({
     }
 
     return (
-        <>
+        <div className = "PersonDetails">
             <LabeledInput
                 name = "name"
                 type = "text"
@@ -32,6 +32,6 @@ export const PersonDetails = ({
                 onChange = { onDetailsChange }
                 label = { emailLabel }
             />
-        </>
+        </div>
     )
 }
