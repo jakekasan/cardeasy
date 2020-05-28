@@ -1,86 +1,41 @@
-import React from "react";
+import React, { useRef } from "react";
 import { LabeledInput } from "./../../../partials/LabeledInput.jsx";
-
-function fixCollaborators(collabs) {
-    let fixedCollaborators = collabs.filter(item => {
-        return !(
-            item.collaboratorName === "" &&
-            item.collaboratorEmail === ""
-            )
-    })
-
-    if (fixedCollaborators.length === 0) {
-        return [{
-            collaboratorName: "",
-            collaboratorEmail: ""
-        }]
-    }
-
-    let lastCollaborator = fixedCollaborators[fixedCollaborators.length - 1];
-
-    if (lastCollaborator.collaboratorName !== "" || lastCollaborator.collaboratorEmail !== "") {
-        return [...fixedCollaborators, {
-            collaboratorName: "",
-            collaboratorEmail: ""
-        }]
-    }
-
-}
 
 export const CollaboratorList = ({
     values,
     onChange
 }) => {
+    const collaborators = values.collaborators
+                                    .filter(item => !(item.name === "" && item.email === ""))
+                                    .concat({ name: "", email: ""})
 
-    const fixedCollaborators = fixCollaborators(values.collaborators);
+    const ulRef = useRef(null);
 
-    function onCollabChangeFactory(index) {
-
-        function onCollabChange(event) {
-            
-            const newValues = fixedCollaborators;
-
-            newValues[index][event.target.name] = event.target.value;
-
-            return onChange({
-                preventDefault: () => {},
-                target: {
-                    name: "collaborators",
-                    value: newValues
-                }
-            })
-        }
-
-        return onCollabChange
-    }
-
-    function newOnChange(event) {
-        const { parentNode: { index }, target: { name, value }} = event;
-
-        values[index] = { ...values[index], [name]: value };
-
-        return onChange(values)
+    function ulOnChange(e) {
+        onChange({
+            ...values,
+            collaborators: Array.from(ulRef.current.children)
+                .map(li => Array.from(li.querySelectorAll("input")))
+                .map(inputs => Object.fromEntries(inputs.map(el => [el.name, el.value])))
+        })
     }
 
     return (
-        <ul>
-            {fixedCollaborators.map((collab, index) => {
+        <ul onChange={ ulOnChange } ref = { ulRef }>
+            {collaborators.map((collab, index) => {
                 return (
                     <li key = { index }>
                         <LabeledInput
                             label = { "Collaborator's Name" }
-                            name = { "collaboratorName" }
+                            name = { "name" }
                             type = { "text" }
-                            onChange = { onCollabChangeFactory(index) }
-                            value = { collab.collaboratorName }
-                            
+                            defaultValue = { collab.name }
                         />
                         <LabeledInput
                             label = { "Collaborator's Email" }
-                            name = { "collaboratorEmail" }
+                            name = { "email" }
                             type = { "email" }
-                            onChange = { onCollabChangeFactory(index) }
-                            value = { collab.collaboratorEmail }
+                            defaultValue = { collab.email }
                         />
                     </li>
                 )
