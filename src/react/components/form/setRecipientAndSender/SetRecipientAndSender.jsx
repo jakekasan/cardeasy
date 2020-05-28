@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PersonDetails } from "./../../../partials/PersonDetails.jsx";
-import { SectionTitle } from "./../../../partials/SectionTitle.jsx";
 import { Page } from "./../../../partials/Page.jsx";
 
 export const SetRecipientAndSender = ({
@@ -11,32 +10,20 @@ export const SetRecipientAndSender = ({
 
     const { sender, recipient } = values;
 
-    function onChangeFactory(keyName) {
-        function wrappedOnChange(newData) {
-            return onChange({...values, [keyName]: newData})
-        }
-        return wrappedOnChange
-    }
-
     return (
         <Page
             title = { "Tell us about you and who we're sending the card to!"}
             stepNumber = { stepNumber }
         >
-            {/* <SectionTitle
-                title = { "Tell us some details about you and who we're sending the card to!"}
-                stepNumber = { stepNumber }
-            /> */}
-
             <PersonDetails
                 values = { sender }
-                onChange = { onChangeFactory("sender") }
+                onChange = { (e) => onChange({...values, sender: {...sender, [e.target.name]: e.target.value }}) }
                 nameLabel = { "Your name" }
                 emailLabel = { "Your email" }
                 />
             <PersonDetails
                 values = { recipient }
-                onChange = { onChangeFactory("recipient") }
+                onChange = { (e) => onChange({...values, recipient: {...recipient, [e.target.name]: e.target.value }}) }
                 nameLabel = { "Recipient's name" }
                 emailLabel = { "Recipient's email" }
                 />
