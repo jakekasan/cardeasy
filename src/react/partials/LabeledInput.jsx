@@ -5,7 +5,8 @@ export const LabeledInput = ({
     name,
     type,
     onChange,
-    value
+    value,
+    ...otherProps
 }) => {
     return (
         <>
@@ -17,6 +18,7 @@ export const LabeledInput = ({
                 type = { type }
                 value = { value }
                 onChange = { onChange }
+                {...otherProps}
                 />
         </>
     )
