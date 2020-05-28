@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 
-
+const DEFAULT_FORM_VALUES = {
+    collaborators: [{ name: "", email: ""}],
+    recipient: { name: "", email: ""},
+    sender: { name: "", email: "" },
+    message: "",
+    cardOccasion: "",
+    cardDesign: "",
+    sendDate: new Date(),
+}
 
 export const useCardFormValidation = ({ defaultFormData = DEFAULT_FORM_VALUES}) => {
     let [ formData, setFormData ] = useState(defaultFormData);
