@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MultiPage } from "../../partials/MultiPage.jsx";
 import { SetCardOccasion } from "./setCardOccasion/SetCardOccasion.jsx";
 import { SetCollaborators } from "./setCollaborators/SetCollaborators.jsx";
@@ -13,17 +13,24 @@ export const NewCardForm = ({
 
     const { formData, updateFormData, onSubmit } = useCardFormValidation({
         defaultFormData: {
-            collaborators: [],
+            collaborators: [{ name: "", email: ""}],
             recipient: { name: "", email: ""},
             sender: { name: "", email: "" },
             message: "",
-            cardOccasion: "",
-            cardDesign: "",
+            cardOccasion: undefined,
+            cardDesign: undefined,
             sendDate: new Date(),
         }
     });
 
     const updatedProps = { ...props, values: formData, onChange: updateFormData, onSubmit: onSubmit };
+
+    useEffect(() => {
+        console.log("NewCardForm rendering");
+        return () => {
+            console.log("NewCardForm unmounting")
+        }
+    })
 
     return (
         <MultiPage { ...updatedProps }>
