@@ -11,25 +11,20 @@ export const PersonDetails = ({
     emailLabel = DEFAULT_EMAIL_LABEL
 }) => {
 
-    function onDetailsChange(event) {
-        const { event: { target: { name, value }}} = event;
-        return onChange({...values, [name]: value})
-    }
-
     return (
         <div className = "PersonDetails">
             <LabeledInput
                 name = "name"
                 type = "text"
                 value = { values.name }
-                onChange = { onDetailsChange }
+                onChange = { onChange }
                 label = { nameLabel }
             />
             <LabeledInput
                 name = "email"
                 type = "email"
                 value = { values.email }
-                onChange = { onDetailsChange }
+                onChange = { onChange }
                 label = { emailLabel }
             />
         </div>
