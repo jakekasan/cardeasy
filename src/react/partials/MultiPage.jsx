@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 
 export const MultiPage = (
     {
@@ -7,6 +7,12 @@ export const MultiPage = (
         ...props
     }
 ) => {
+
+    useEffect(() => {
+        console.log("MultiPage rendering");
+        return () => console.log("Multipage unmounting")
+    })
+
     const formSubmit = () => {
         console.log("formSubmit");
         onSubmit();
