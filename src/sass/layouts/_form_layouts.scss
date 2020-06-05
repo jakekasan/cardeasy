@@ -1,0 +1,47 @@
+
+@use "form_children" as formChildren;
+
+@mixin FormParentMobile {
+    display: grid;
+    grid-template-areas:
+        "form-title form-title"
+        "form-part form-part"
+        "form-back form-back"
+        ;
+}
+
+@mixin FormParent {
+    display: grid;
+    grid-template-areas:
+        "form-title form-title form-title"
+        "form-part form-part form-part form-part"
+        "form-back . . form-next"
+        ;
+    grid-template-columns: repeat(1fr, 4);
+    grid-template-rows: 50px 800px 50px;
+    width: 100%;
+    
+    h5 {
+        @include formChildren.FormH5;
+    }
+
+    section {
+        @include formChildren.FormSection;
+    }
+
+    .backButton {
+        @include formChildren.FormBackButton;
+    }
+
+    .nextButton {
+        @include formChildren.FormNextButton;
+    }
+
+    textarea {
+        @include formChildren.FormTextArea;
+    }
+
+    @media screen and (max-width: 500px) {
+        @include FormParentMobile;
+    }
+}
