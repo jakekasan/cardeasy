@@ -1,25 +1,15 @@
-body {
-    background-color: red;
+//
+// 
+// 
+
+@use "page";
+// @use "form.scss" as form;
+@use "layouts/index" as layout;
+
+html {
+    @include layout.html
 }
 
-.page {
-    display: grid;
-
-    nav {
-        background-color: antiquewhite;
-    }
-
-    header {
-        background-color: beige;
-    }
-
-    .pageContent {
-        background-color: red;
-    }
-
-    footer {
-        background-color: aqua;
-    }
-
-
+#App {
+    @include layout.App
 }
