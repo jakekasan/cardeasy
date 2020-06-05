@@ -1,0 +1,74 @@
+@use "form_layouts" as Form;
+
+@mixin html {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+
+    * {
+        background-color: azure;
+    }
+
+    
+}
+
+@mixin AppLayout {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px auto 100px;
+    grid-template-areas:
+        "header nav"
+        "content content"
+        "footer footer"
+        ;
+}
+
+@mixin AppLayoutMobile {
+    height: auto;
+    width: 100%;
+    grid-template-rows: 100px 100px auto 100px;
+    grid-template-areas:
+        "header"
+        "nav"
+        "content"
+        "footer"
+        ;
+}
+
+@mixin App {
+    // defaults
+    margin: auto;
+
+    @include AppLayout;
+    
+    .formParent {
+        @include Form.FormParent;
+    }
+    
+
+    @media screen and (max-width: 400px) {
+        width: 350px;
+    }
+
+    @media screen and (min-width: 600px) {
+        width: 400px;
+    }
+
+    @media screen and (min-width: 800px) {
+        width: 550px;
+    }
+
+    @media screen and (min-width: 1000px) {
+        width: 700px;
+    }
+
+    @media screen and (min-width: 1200px) {
+        width: 900px;
+    }
+
+    @media screen and (min-width: 1800px) {
+        width: 1700px;
+    }
+}
