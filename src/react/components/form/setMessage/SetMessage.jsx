@@ -17,7 +17,12 @@ export const SetMessage = ({
             stepNumber = { stepNumber }
             title = { "Write a special message on the card!" }
         >
-            <input type="text" name="message" value={ values.message } onChange={ messageOnChange }/>
+            <textarea
+                type="text"
+                name="message"
+                value={ values.message }
+                placeholder={ "Say something!" }
+                onChange={ messageOnChange }/>
         </Page>
     )
 }
