@@ -13,7 +13,8 @@ import { NewCardForm } from "./components/form/NewCardForm.jsx";
 
 //import styles from "./../sass/main.scss";
 
-import "./App.css";
+//import "./App.css";
+import "./../sass/main.scss";
 
 const App = () => {
     return (
