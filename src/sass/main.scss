@@ -3,8 +3,10 @@
 // 
 
 @use "page";
+@use "variables";
 // @use "form.scss" as form;
 @use "layouts/index" as layout;
+
 
 html {
     @include layout.html
