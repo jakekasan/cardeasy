@@ -1,0 +1,41 @@
+@mixin CardOccasion {
+    ul.CardOccasion {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li.CardOccasion {
+        text-decoration: none;
+        list-style: none;
+        border: 2px solid cornflowerblue;
+        margin: 5px;
+        padding: 0px;
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        transition: 0.5s;
+
+        &:hover {
+            transition: 1s;
+            background-color: cornflowerblue;
+
+            * {
+                transition: 1s;
+                color: white;
+            }
+        }
+        
+        &.selected {
+            background-color: darkorange;
+        }
+        
+        &.selected * {
+            color: white;
+            transition: 1s;
+        }
+
+    }
+}
