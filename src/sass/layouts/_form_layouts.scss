@@ -13,11 +13,11 @@
 @mixin FormParent {
     display: grid;
     grid-template-areas:
-        "form-title form-title form-title"
+        "form-title form-title form-title form-title"
         "form-part form-part form-part form-part"
         "form-back . . form-next"
         ;
-    grid-template-columns: repeat(1fr, 4);
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 50px 800px 50px;
     width: 100%;
     
