@@ -6,10 +6,11 @@
 @use "variables";
 // @use "form.scss" as form;
 @use "layouts/index" as layout;
-
+@use "partials/index" as partials;
 
 html {
-    @include layout.html
+    @include layout.html;
+    @include partials.CardOccasion;
 }
 
 #App {
