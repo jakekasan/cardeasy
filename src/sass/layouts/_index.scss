@@ -12,6 +12,10 @@
         background-color: white;
     }
 
+    box-sizing: border-box;
+    color: cornflowerblue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
     
 }
 
@@ -48,10 +52,17 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    h1 {
+        text-align: center;
+        font-size: 3rem;
+    }
 }
 
 @mixin AppFooter {
     grid-area: footer;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 @mixin AppNav {
@@ -84,6 +95,21 @@
             height: 40px;
             width: 100%;
         }
+
+        .underlined {
+            color: cornflowerblue;
+            text-decoration: underline;
+            text-underline-offset: 10px;
+            text-decoration-thickness: 3px;
+            transition: 0.2s;
+
+            &:hover {
+                transition: 1s;
+                color: mediumblue;
+            }
+        }
+        
+        
     }
 }
 
