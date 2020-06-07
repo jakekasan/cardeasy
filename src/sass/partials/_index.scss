@@ -1,0 +1,5 @@
+@use "card_occasion" as card_occasion;
+
+@mixin CardOccasion {
+    @include card_occasion.CardOccasion;
+}
