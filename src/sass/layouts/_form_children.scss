@@ -23,3 +23,23 @@
     resize: none;
     padding: 15px;
 }
+
+@mixin general {
+    .buttonStyle {
+        font-size: 1.0rem;
+        background-color: cornflowerblue;
+        display: block;
+        color: white;
+        border: none;
+        margin: 0px;
+        font-size: 2rem;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.5s;
+    }
+
+    .buttonstyle:hover {
+        background-color: mediumblue;
+        transition: 1s;
+    }
+}

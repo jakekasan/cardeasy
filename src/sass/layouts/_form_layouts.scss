@@ -20,6 +20,8 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 50px 800px 50px;
     width: 100%;
+
+    @include formChildren.general;
     
     h5 {
         @include formChildren.FormH5;
