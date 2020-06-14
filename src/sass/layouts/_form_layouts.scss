@@ -8,6 +8,9 @@
         "form-part form-part"
         "form-back form-back"
         ;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px auto 50px
 }
 
 @mixin FormParent {
@@ -17,8 +20,8 @@
         "form-part form-part form-part form-part"
         "form-back . . form-next"
         ;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 50px 800px 50px;
+    grid-auto-columns: 1fr;
+    grid-template-rows: 150px auto 50px;
     width: 100%;
 
     @include formChildren.general;
