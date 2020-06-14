@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { LabeledInput } from "./../../../partials/LabeledInput.jsx";
+import { PersonDetails } from "../../../partials/PersonDetails.jsx";
 
 export const CollaboratorList = ({
     values,
@@ -21,22 +22,11 @@ export const CollaboratorList = ({
     }
 
     return (
-        <ul onChange={ ulOnChange } ref = { ulRef }>
+        <ul onChange = { ulOnChange } ref = { ulRef } className = { "CollaboratorList" }>
             {collaborators.map((collab, index) => {
                 return (
-                    <li key = { index }>
-                        <LabeledInput
-                            label = { "Collaborator's Name" }
-                            name = { "name" }
-                            type = { "text" }
-                            defaultValue = { collab.name }
-                        />
-                        <LabeledInput
-                            label = { "Collaborator's Email" }
-                            name = { "email" }
-                            type = { "email" }
-                            defaultValue = { collab.email }
-                        />
+                    <li key = { index } className>
+                        <PersonDetails values = { collab } onChange = { null }/>
                     </li>
                 )
             })}
