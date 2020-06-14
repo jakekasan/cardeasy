@@ -1,5 +1,10 @@
 @use "card_occasion" as card_occasion;
+@use "person_details" as person_details;
 
 @mixin CardOccasion {
     @include card_occasion.CardOccasion;
+}
+
+@mixin PersonDetails {
+    @include person_details.PersonDetails;
 }
