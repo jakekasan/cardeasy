@@ -16,7 +16,7 @@
         width: 200px;
         display: flex;
         justify-content: center;
-        transition: 0.5s;
+        transition: 1s;
 
         &:hover {
             transition: 1s;
@@ -25,14 +25,17 @@
             * {
                 transition: 1s;
                 color: white;
+                background-color: cornflowerblue;
             }
         }
         
         &.selected {
             background-color: darkorange;
+            transition: 1s;
         }
         
         &.selected * {
+            background-color: darkorange;
             color: white;
             transition: 1s;
         }
