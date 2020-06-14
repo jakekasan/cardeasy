@@ -10,16 +10,16 @@ export const Page = ({children, title, stepNumber, styles = {}, ...props}) => {
         }
     })
 
-    const { sectionClassname, titleClassname } = styles;
+    const { sectionClassName, titleClassName } = styles;
     
     return (
         <>
             <SectionTitle
                 title={title}
                 stepNumber={stepNumber}
-                titleClassname={titleClassname}
+                titleClassname={titleClassName}
             />
-            <section className={ sectionClassname }>
+            <section className={ sectionClassName }>
             { children }
             </section>
         </>
