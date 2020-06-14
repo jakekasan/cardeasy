@@ -10,10 +10,16 @@ export const SetRecipientAndSender = ({
 
     const { sender, recipient } = values;
 
+    const styles = {
+        sectionClassName: "PersonsDetails" // horrible way of doing this...
+    }
+
     return (
         <Page
             title = { "Tell us about you and who we're sending the card to!"}
             stepNumber = { stepNumber }
+            className = "PersonsDetails"
+            styles = { styles }
         >
             <PersonDetails
                 values = { sender }
