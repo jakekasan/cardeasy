@@ -1,19 +1,28 @@
 @mixin PersonDetails {
     .PersonDetails {
+
         display: grid;
-        grid-template-columns: 1fr 2fr 1fr 2fr;
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        padding: 10px 50px;
 
-        input {
-            grid-area: a;
-            padding: 12px;
-
-            &:focus {
-                border-color: tomato;
-            }
+        * {
+            margin: 20px 20px;
         }
 
         label {
-            grid-area: a;
+            display: none;
+            height: 100%;
+            //padding: 5px;
+            justify-content: center;
+            
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid cornflowerblue;
+            border-radius: 25px;
+
         }
     }
 }
