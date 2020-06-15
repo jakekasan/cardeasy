@@ -22,11 +22,11 @@ export const CollaboratorList = ({
     }
 
     return (
-        <ul onChange = { ulOnChange } ref = { ulRef } className = { "CollaboratorList" }>
+        <ul ref = { ulRef } className = { "CollaboratorList" }>
             {collaborators.map((collab, index) => {
                 return (
-                    <li key = { index } className>
-                        <PersonDetails values = { collab } onChange = { null }/>
+                    <li key = { index }>
+                        <PersonDetails values = { collab } onChange = { ulOnChange }/>
                     </li>
                 )
             })}
