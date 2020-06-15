@@ -11,6 +11,7 @@ html {
     @include layout.html;
     @include partials.CardOccasion;
     @include partials.PersonDetails;
+    @include partials.LabeledInput;
 }
 
 #App {
