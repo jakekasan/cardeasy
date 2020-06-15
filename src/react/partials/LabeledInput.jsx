@@ -9,17 +9,18 @@ export const LabeledInput = ({
     ...otherProps
 }) => {
     return (
-        <>
-            <label
-                htmlFor = { name }
-            >{ label }</label>
+        <div className = { "LabeledInput" }>
             <input
                 name = { name }
                 type = { type }
                 value = { value }
                 onChange = { onChange }
+                placeholder = { (type === "email") ? "vader@empire.imp" : "Darth Vader" }
                 {...otherProps}
                 />
-        </>
+            <label
+                htmlFor = { name }
+            >{ label }</label>
+        </div>
     )
 }
