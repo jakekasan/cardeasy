@@ -1,5 +1,6 @@
 @use "card_occasion" as card_occasion;
 @use "person_details" as person_details;
+@use "labeled_input" as labeled_input;
 
 @mixin CardOccasion {
     @include card_occasion.CardOccasion;
@@ -7,4 +8,8 @@
 
 @mixin PersonDetails {
     @include person_details.PersonDetails;
+}
+
+@mixin LabeledInput {
+    @include labeled_input.LabeledInput;
 }
