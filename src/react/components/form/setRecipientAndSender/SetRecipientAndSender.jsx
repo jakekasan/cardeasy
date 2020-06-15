@@ -18,7 +18,7 @@ export const SetRecipientAndSender = ({
         <Page
             title = { "Tell us about you and who we're sending the card to!"}
             stepNumber = { stepNumber }
-            className = "PersonsDetails"
+            className = "RecipientAndSender"
             styles = { styles }
         >
             <PersonDetails
@@ -27,6 +27,7 @@ export const SetRecipientAndSender = ({
                 nameLabel = { "Your name" }
                 emailLabel = { "Your email" }
                 />
+            <br/>
             <PersonDetails
                 values = { recipient }
                 onChange = { (e) => onChange({...values, recipient: {...recipient, [e.target.name]: e.target.value }}) }
