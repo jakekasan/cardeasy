@@ -23,8 +23,15 @@
 }
 
 @mixin FormTextArea {
+    box-sizing: border-box;
     resize: none;
     padding: 15px;
+    margin: 5%;
+    width: 90%;
+    height: 70%;
+    border-width: medium;
+    border-color: cornflowerblue;
+    border-radius: 25px;
 }
 
 @mixin general {
@@ -41,8 +48,8 @@
         transition: 0.5s;
     }
 
-    .buttonstyle:hover {
-        background-color: mediumblue;
+    .buttonStyle:hover {
+        background-color: blue;
         transition: 1s;
     }
 }
