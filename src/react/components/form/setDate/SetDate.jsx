@@ -25,8 +25,8 @@ export const SetDate = ({
         )
     }
 
-    const dateInputs = dateParts.filter(part => ["year", "month", "day"].includes(part.name)).map(part => renderDatePart(part, part.name));
-    const timeInputs = dateParts.filter(part => ["hour", "minute"].includes(part.name)).map(part => renderDatePart(part, part.name));
+    const dateInputs = dateParts.filter(part => ["year", "month", "day"].includes(part.name));//.map(part => renderDatePart(part, part.name));
+    const timeInputs = dateParts.filter(part => ["hour", "minute"].includes(part.name));//.map(part => renderDatePart(part, part.name));
 
     return (
         <Page
