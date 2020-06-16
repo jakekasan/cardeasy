@@ -8,6 +8,7 @@
     }
 
     li.CardOccasion {
+        list-style-type: none;
         text-decoration: none;
         list-style: none;
         border: 2px solid cornflowerblue;
@@ -21,6 +22,7 @@
         &:hover {
             transition: 1s;
             background-color: cornflowerblue;
+            cursor: pointer;
 
             * {
                 transition: 1s;
@@ -30,14 +32,18 @@
         }
         
         &.selected {
-            background-color: darkorange;
+            background-color: cornflowerblue;
             transition: 1s;
         }
         
         &.selected * {
-            background-color: darkorange;
+            background-color: cornflowerblue;
             color: white;
             transition: 1s;
+        }
+
+        &.selected:hover, &.selected:hover * {
+            background-color: blue;
         }
 
     }
