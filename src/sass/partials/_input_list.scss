@@ -1,0 +1,10 @@
+@mixin InputList {
+    ul.inputList {
+        list-style-type: none;
+
+        li {
+            background-color: cornsilk;
+            margin: 30px 0;
+        }
+    }
+}
