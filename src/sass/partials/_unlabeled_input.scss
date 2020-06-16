@@ -1,0 +1,23 @@
+@mixin UnLabeledInput {
+    input.UnLabeledInput {
+        font-size: 1.5rem;
+        padding: 0px 10px;
+        display: block;
+        width: 80px;
+        border: none;
+        border-bottom: 1px solid cornflowerblue;
+        text-align: center;
+        margin: 0px 5px;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:invalid {
+            border: none;
+            border-bottom: 2px solid salmon;
+        }
+
+    }
+
+}
