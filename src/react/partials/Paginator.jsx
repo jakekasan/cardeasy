@@ -1,7 +1,7 @@
 import React, { useState, useReducer, useEffect } from "react";
 
-const Button = ({ children }) => {
-    return <button className = "buttonStyle">{ children }</button>
+const Button = ({ children, ...props }) => {
+    return <button className = "buttonStyle" {...props}>{ children }</button>
 }
 
 const ItemList = (props) => {
@@ -14,62 +14,83 @@ const Loading = () => {
     return <h3>Loading...</h3>
 }
 
-const PaginatorContent = ({ data, currentPage, maxPerPage }) => {
-    if (data.length > 0) {
-        const startIndex = (currentPage - 1) * maxPerPage;
-        const endIndex = (currentPage) * maxPerPage;
-        const currentData = data.slice(startIndex, endIndex);
+const PaginatorContent = ({ data }) => {
 
-        return <ul>
-            { currentData.map(item => <li>{ item }</li>)}
-        </ul>
-    } else {
-        return <Loading />
-    }
-}
-
-
-DEFAULT_DATA = [
-    "Birthday",
-    "New Child",
-    "Anniversay",
-    "Bar Mitzvah"
-].map(item => Object.fromEntries(["name", item]));
-
-const delayedGet = (setter) => setTimeout(setter(DEFAULT_DATA), 2000);
-
-export const Paginator = ({ getData = delayedGet, ...props }) => {
-
-    const [ items, setItems ] = useState([]);
-
-    const reducer = (action, state) => {
-        switch (action.type) {
-            case "back":
-                return {
-                    ...state,
-                    currentPage: Math.max(state.currentPage, 0)
-                }
-            case "next":
-                return {
-                    ...state,
-                    currentPage: Math.min(state.currentPage, items.length - 1)
-                }
-        }
+    const paginatorCoreStyles = {
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr 1fr 1fr",
+        gridAutoRows: "50px",
+        gridArea: "content"
     }
 
-    const [ state, dispatch ] = useReducer(reducer, {
-        currentPage: 0
-    })
-
-    useEffect(() => {
-        getData(setItems);
-    }, []);    
+    console.log(data)
 
     return (
-        <div className="Paginator">
-            <PaginatorContent data = {items} currentPage = { state.currentPage } maxPerPage = {10}/>
-            <Button onClick = { dispatch({type: "back"}) }>Back</Button>
-            <Button onClick = { dispatch({type: "next"}) }>Next</Button>
+        <ul style = { paginatorCoreStyles }>
+            { data.map(item => <li key = {item.name}>{ item.name }</li>)}
+        </ul>
+    )
+}
+
+let DEFAULT_DATA = (new Array(36)).fill(0).map((_, i) => { return { name: `Design ${i}`}});
+
+export const Paginator = ({ data = [], maxPerPage = 12, ...props }) => {
+
+    const [ currentPage, setCurrentPage ] = useState(1);
+    const [ items, setItems ] = useState(data);
+
+    const [ maxPages, setMaxPages ] = useState(Math.ceil(data.length / maxPerPage));
+
+    useEffect(() => {
+        console.log("Setting data to:");
+        console.log(DEFAULT_DATA);
+        setTimeout(() => {
+            setItems(DEFAULT_DATA)
+        }, 1000);
+    }, [])
+
+    useEffect(() => {
+        console.log("Setting max pages...")
+        console.log(`Data length is now ${items.length}`)
+        console.log(items);
+        setMaxPages(Math.ceil(items.length / maxPerPage))
+    }, [items])
+
+    const startIndex = (currentPage - 1) * maxPerPage;
+    const endIndex = (currentPage) * maxPerPage;
+    const currentData = items.slice(startIndex, endIndex);
+
+    const paginatorStyle = {
+        display: "grid",
+        gridTemplateColumns: "10% 30% 10%",
+        gridTemplateAreas: "left-blade content right-blade"
+    }
+
+    return (
+        <div className="Paginator" style = { paginatorStyle }>
+            { 
+                (currentData.length !== 0)
+                ? <PaginatorContent data = { currentData } />
+                : <Loading />
+            }
+            <Button
+                onClick = { () => setCurrentPage((currentPage < 2)
+                                            ? currentPage
+                                            : currentPage - 1) }
+                disabled = { currentPage < 2 }
+                style = {{gridArea: "left-blade"}}
+                >Back</Button>
+            <Button
+                onClick = { () => {
+                    console.log(`Setting current page to ${currentPage + 1}`)
+                    console.log(`maxPages is ${maxPages}`)
+                    setCurrentPage((currentPage >= maxPages)
+                                    ? currentPage
+                                    : currentPage + 1)
+                                } }
+                disabled = { currentPage >= maxPages }
+                style = {{gridArea: "right-blade"}}
+                >Next</Button>
         </div>
     )
 }
