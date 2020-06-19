@@ -11,7 +11,7 @@ export const MultiPage = (
     useEffect(() => {
         console.log("MultiPage rendering");
         return () => console.log("Multipage unmounting")
-    })
+    }, [])
 
     const formSubmit = () => {
         console.log("formSubmit");

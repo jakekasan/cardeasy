@@ -35,7 +35,7 @@ export const SetCardOccasion = ({
     useEffect(() => {
         console.log("SetCardOccasion starting");
         return () => console.log("SetCardOccasion stopping")
-    })
+    }, [])
 
     return (
         <Page

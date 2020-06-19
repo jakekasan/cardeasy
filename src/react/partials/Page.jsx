@@ -8,7 +8,7 @@ export const Page = ({children, title, stepNumber, styles = {}, ...props}) => {
         return () => {
             console.log(`Page number ${stepNumber} unmounting`)
         }
-    })
+    }, [])
 
     const { sectionClassName, titleClassName } = styles;
     
