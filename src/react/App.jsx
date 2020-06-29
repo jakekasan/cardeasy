@@ -1,9 +1,10 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import {
     BrowserRouter as Router,
     Route,
-    Link
+    Link,
+    Switch
 } from "react-router-dom";
 
 const MainLogo = () => <h1>CardEasy</h1>
@@ -27,43 +28,89 @@ const Header = () => {
     )
 }
 
+const Footer = () => <h3>End of the page</h3>
+
+const ChildOne = (props) => {
+    useEffect(() => () => console.log("ChildOne unmounting"), []);
+
+    return (
+        <>
+        <h5>First Child</h5>
+        <input type="text" onBlur={ () => console.log("input blurring") }/>
+        </>
+    )
+}
+
+const ChildTwo = (props) => {
+    useEffect(() => () => console.log("ChildTwo unmounting"), []);
+
+    return (
+        <>
+        <h5>Second Child</h5>
+        <div>
+            <input type="color"/>
+        </div>
+        </>
+    )
+}
+
 const MultiPartForm = ({ children }) => {
 
     const [ formChildValid, setFromChildValid ] = useState(false);
 
-    const reducer = (action, currentPage) => {
+    const reducer = (state, action) => {
+        console.log(`Reducer with state = ${JSON.stringify(state)} and action = ${JSON.stringify(action)}`);
         switch (action.type) {
             case "next":
-                if (currentPage < children.length - 1) return currentPage + 1
+                if (state.currentPage < children.length - 1) {
+                    return { ...state, currentPage: state.currentPage + 1}
+                } else {
+                    return state
+                }
 
-                // otherwise submit
-                submit()
+
             case "back":
-                return (currentPage > 0) ? currentPage - 1 : currentPage
+                if (state.currentPage > 0) {
+                    return { ...state, currentPage: state.currentPage - 1 }
+                } else { 
+                    return state
+                }
+
             default:
                 return currentPage
         }
     }
 
-    const [ currentPage, currentPageDispatch ] = useReducer(reducer, 0);
+    const [ state, dispatch ] = useReducer(reducer, { currentPage: 0});
 
-    const pageNext = () => currentPageDispatch({ type: "next" });
-    const pageBack = () => currentPageDispatch({ type: "back" });
+    const pageNext = () => {
+        console.log("Clicked next...")
+        dispatch({ type: "next" })
+    };
+
+    const pageBack = () => {
+        console.log("Clicked back...")
+        dispatch({ type: "back" })
+    };
+
+    console.log("Rendering page", state.currentPage)
 
     return (
         <section>
             <article>
-                { React.cloneElement( children[state.currentPage], { setIsValid: setFromChildValid })}
+                { React.cloneElement( children[state.currentPage], { pageNumber: state.currentPage + 1, setIsValid: setFromChildValid })}
             </article>
-            <Button className={ "BackButton" } onClick={ pageBack }>Back</Button>
-            <Button className={ "NextButton" } onClick={ pageNext }>{ (state) }</Button>
+            <button className={ "BackButton" } onClick={ pageBack }>Back</button>
+            <button className={ "NextButton" } onClick={ pageNext }>{ (state.currentPage < children.length - 1) ? "Next" : "Submit" }</button>
         </section>
     )
 }
 
 const PageNotFound = () => <h3>Oops...</h3>
+const SplashPage = () => <h3>Blamo! You're home!</h3>
+const Content = ({children}) => <main>{ children }</main>
 
-const NewApp = () => {
+const App = () => {
     return (
         <>
             <Router>
@@ -75,7 +122,8 @@ const NewApp = () => {
                         </Route>
                         <Route path="/new">
                             <MultiPartForm>
-                                
+                                <ChildOne />
+                                <ChildTwo />
                             </MultiPartForm>
                         </Route>
                         <Route path="*">
@@ -89,4 +137,5 @@ const NewApp = () => {
     )
 }
 
-ReactDOM.render(<NewApp />, document.querySelector("#App"));
+export default App;
+// ReactDOM.render(<NewApp />, document.querySelector("#App"));
