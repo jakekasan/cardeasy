@@ -1,0 +1,64 @@
+$dark: cornflowerblue
+$light: azure
+
+body, html 
+    margin: 0px
+    padding: 0px
+    
+    *
+        box-sizing: border-box
+
+#App
+    display: flex
+    flex-direction: column
+    justify-items: center
+
+    header
+        width: 100vw
+        background-color: $dark
+        color: $light
+        display: flex
+        flex-direction: column
+        align-content: space-evenly
+        align-items: center
+        // justify-content: center
+
+        nav
+            display: flex
+            flex-direction: row
+
+            *
+                margin: 5px 20px
+            
+
+    main
+        width: 700px
+        background-color: azure
+        margin: auto
+
+        .MultiPartForm
+            display: grid
+            grid-template-areas: "content content" "back next"
+            grid-template-rows: auto 100px
+            
+            article
+                grid-area: content
+                height: 100%
+
+            .BackButton
+                grid-area: back
+            
+            .NextButton
+                grid-area: next
+
+
+    footer
+        width: 100vw
+        height: 200px
+        position: absolute
+        bottom: 0
+        background-color: $dark
+        display: flex
+        flex-direction: row
+        align-content: center
+        justify-content: center
