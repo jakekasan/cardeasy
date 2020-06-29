@@ -7,6 +7,8 @@ import {
     Switch
 } from "react-router-dom";
 
+import "./Styles.sass";
+
 const MainLogo = () => <h1>CardEasy</h1>
 
 const Nav = () => {
@@ -28,7 +30,12 @@ const Header = () => {
     )
 }
 
-const Footer = () => <h3>End of the page</h3>
+const Footer = () => {
+    return (
+    <footer>
+        <h3>End of the page</h3>
+    </footer>
+    )}
 
 const ChildOne = (props) => {
     useEffect(() => () => console.log("ChildOne unmounting"), []);
@@ -96,7 +103,7 @@ const MultiPartForm = ({ children }) => {
     console.log("Rendering page", state.currentPage)
 
     return (
-        <section>
+        <section className="MultiPartForm">
             <article>
                 { React.cloneElement( children[state.currentPage], { pageNumber: state.currentPage + 1, setIsValid: setFromChildValid })}
             </article>
