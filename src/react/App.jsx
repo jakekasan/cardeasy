@@ -61,57 +61,6 @@ const ChildTwo = (props) => {
     )
 }
 
-const MultiPartForm = ({ children }) => {
-
-    const [ formChildValid, setFromChildValid ] = useState(false);
-
-    const reducer = (state, action) => {
-        console.log(`Reducer with state = ${JSON.stringify(state)} and action = ${JSON.stringify(action)}`);
-        switch (action.type) {
-            case "next":
-                if (state.currentPage < children.length - 1) {
-                    return { ...state, currentPage: state.currentPage + 1}
-                } else {
-                    return state
-                }
-
-
-            case "back":
-                if (state.currentPage > 0) {
-                    return { ...state, currentPage: state.currentPage - 1 }
-                } else { 
-                    return state
-                }
-
-            default:
-                return currentPage
-        }
-    }
-
-    const [ state, dispatch ] = useReducer(reducer, { currentPage: 0});
-
-    const pageNext = () => {
-        console.log("Clicked next...")
-        dispatch({ type: "next" })
-    };
-
-    const pageBack = () => {
-        console.log("Clicked back...")
-        dispatch({ type: "back" })
-    };
-
-    console.log("Rendering page", state.currentPage)
-
-    return (
-        <section className="MultiPartForm">
-            <article>
-                { React.cloneElement( children[state.currentPage], { pageNumber: state.currentPage + 1, setIsValid: setFromChildValid })}
-            </article>
-            <button className={ "BackButton" } onClick={ pageBack }>Back</button>
-            <button className={ "NextButton" } onClick={ pageNext }>{ (state.currentPage < children.length - 1) ? "Next" : "Submit" }</button>
-        </section>
-    )
-}
 
 const PageNotFound = () => <h3>Oops...</h3>
 const SplashPage = () => <h3>Blamo! You're home!</h3>
