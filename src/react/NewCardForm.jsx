@@ -67,6 +67,7 @@ const DEFAULT_OCCASION = { name: "Unknown Occasion" };
 const Occasion = (props) => {
     return <div>{ props.data }</div>
 }
+
 export const CardOccasion = ({ occasion = DEFAULT_OCCASION, occasionOnClick: onClick}) => {
 
     const selected = (occasion.selected) ? " selected" : "";
@@ -74,6 +75,20 @@ export const CardOccasion = ({ occasion = DEFAULT_OCCASION, occasionOnClick: onC
         <li className={`CardOccasion${selected}`} id={ occasion.id } onClick={ () => onClick(occasion.id) }>
             <p>{ occasion.name }</p>
         </li>
+    )
+}
+
+const Paginator = ({data, maxPerPage}) => {
+    return (
+        <div>
+            <content>
+
+            </content>
+            <button></button>
+            <button></button>
+        </div>
+        
+
     )
 }
 
