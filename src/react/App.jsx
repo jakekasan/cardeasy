@@ -7,6 +7,7 @@ import {
     Switch
 } from "react-router-dom";
 
+import NewCardForm from "./NewCardForm.jsx";
 import "./Styles.sass";
 
 const MainLogo = () => <h1>CardEasy</h1>
@@ -77,10 +78,11 @@ const App = () => {
                             <SplashPage />
                         </Route>
                         <Route path="/new">
-                            <MultiPartForm>
+                            {/* <MultiPartForm>
                                 <ChildOne />
                                 <ChildTwo />
-                            </MultiPartForm>
+                            </MultiPartForm> */}
+                            <NewCardForm />
                         </Route>
                         <Route path="*">
                             <PageNotFound />
