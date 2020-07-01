@@ -46,9 +46,12 @@ const Occasion = ({ name }) => <li className="Occasion">{ name }</li>
 const OccasionList = () => {
     const { currentView } = useContext(PaginatorContext);
     return (
-        <ul className="OccasionList">
-            { currentView.map(occasion => <Occasion key={occasion.id} {...occasion} />)}
-        </ul>
+        <article className="Content">
+            <h5>Select from these occasions!</h5>
+            <ul className="OccasionList">
+                { currentView.map(occasion => <Occasion key={occasion.id} {...occasion} />)}
+            </ul>
+        </article>
     )
 }
 
@@ -72,10 +75,10 @@ const SetOccasion = () => {
 
 const SetSender = () => {
     return (
-        <>
+        <article className="Content">
             <h5>Title</h5>
             <p>Content</p>
-        </>
+        </article>
     )
 }
 
@@ -84,7 +87,7 @@ const JustRender = () => {
     console.log("JustRender - currentView:");
     console.log(currentView);
     return (
-        <>{ currentView.map((item, i) => <div key={i}>{ item }</div>) }</>
+        <>{ currentView.map((item, i) => <div className="Content" key={i}>{ item }</div>) }</>
     )
 }
 
