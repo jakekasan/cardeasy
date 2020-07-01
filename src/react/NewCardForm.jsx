@@ -1,53 +1,48 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useReducer } from "react";
 
-const MultiPartForm = ({ children }) => {
 
-    const [ formChildValid, setFromChildValid ] = useState(false);
-
-    const reducer = (state, action) => {
-        console.log(`Reducer with state = ${JSON.stringify(state)} and action = ${JSON.stringify(action)}`);
+const usePagination = ({ maxPage }) => {
+    const reducer = (currentPage, action) => {
         switch (action.type) {
             case "next":
-                if (state.currentPage < children.length - 1) {
-                    return { ...state, currentPage: state.currentPage + 1}
-                } else {
-                    return state
-                }
-
-
+                return (currentPage < maxPage) ? ++currentPage : currentPage
             case "back":
-                if (state.currentPage > 0) {
-                    return { ...state, currentPage: state.currentPage - 1 }
-                } else { 
-                    return state
-                }
-
+                return (currentPage > 0) ? --currentPage : currentPage
+            case "jump":
+                return (0 < action.jump < maxPage) ? action.jump : currentPage
             default:
                 return currentPage
         }
     }
 
-    const [ state, dispatch ] = useReducer(reducer, { currentPage: 0});
+    const [ currentPage, dispatch ] = useReducer(reducer, 0);
 
-    const pageNext = () => {
-        console.log("Clicked next...")
-        dispatch({ type: "next" })
-    };
+    const nextPage = () => dispatch({type: "next"})
+    const prevPage = () => dispatch({type: "back"})
+    const gotoPage = (pageNumber) => dispatch({type: "jump", jump: pageNumber})
 
-    const pageBack = () => {
-        console.log("Clicked back...")
-        dispatch({ type: "back" })
-    };
+    return {
+        currentPage,
+        nextPage,
+        prevPage,
+        gotoPage
+    }
 
-    console.log("Rendering page", state.currentPage)
+}
+
+const MultiPartForm = ({ children }) => {
+
+    const [ isFormChildValid, setIsFormChildValid ] = useState(false);
+
+    const { currentPage, nextPage, prevPage } = usePagination({ maxPage: children.length - 1});
 
     return (
         <section className="MultiPartForm">
             <article>
-                { React.cloneElement( children[state.currentPage], { pageNumber: state.currentPage + 1, setIsValid: setFromChildValid })}
+                { React.cloneElement( children[state.currentPage], { pageNumber: currentPage + 1, setIsValid: setFromChildValid })}
             </article>
-            <button className={ "BackButton" } onClick={ pageBack }>Back</button>
-            <button className={ "NextButton" } onClick={ pageNext }>{ (state.currentPage < children.length - 1) ? "Next" : "Submit" }</button>
+            <button className={ "BackButton" } onClick={ nextPage }>Back</button>
+            <button className={ "NextButton" } onClick={ prevPage }>{ (currentPage < children.length - 1) ? "Next" : "Submit" }</button>
         </section>
     )
 }
