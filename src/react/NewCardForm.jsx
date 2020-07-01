@@ -1,8 +1,33 @@
-import React, { useEffect, useReducer, Children, cloneElement } from "react";
+import React, { useEffect, useReducer, Children, cloneElement, createContext, useState } from "react";
 
+class DataProvider {
+    constructor() {
+        this.#data = []
+    }
 
-const usePagination = ({ maxPage }) => {
+    set data(data) {
+        this.#data = data;
+    }
+
+    get data(data) {
+        return this.#data
+    }
+}
+
+const usePagination = ({ data, maxPerPage }) => {
     console.log(`usePagination - setting maxPage = ${maxPage}`)
+
+    let calcMaxPage = (data, maxPerPage) => Math.ceil(data.length, maxPerPage);
+
+    const [ canGoBack, setCanGoBack ] = useState(true);
+    const [ canGoNext, setCanGoNext ] = useState(true);
+    const [ maxPage, setMaxPage ] = useState(calcMaxPage(data, maxPerPage));
+    const canGoPage = (page) => 0 >= page >= maxPage
+
+    useEffect(() => {
+        setMaxPage(calcMaxPage(data, maxPerPage))
+    }, [ data, maxPerPage ])
+
     const reducer = (currentPage, action) => {
         console.log("Reducer in usePagination called");
         console.log(`Current page: ${currentPage}`)
@@ -10,10 +35,15 @@ const usePagination = ({ maxPage }) => {
 
         switch (action.type) {
             case "next":
+                if (!canGoNext) return currentPage
+                let candidatePage =  ++currentPage;
                 return (currentPage < maxPage) ? ++currentPage : currentPage
             case "back":
-                return (currentPage > 0) ? --currentPage : currentPage
+                if (!canGoBack) return currentPage
+                let candidatePage = --currentPage;
+                return (candidatePage >= 0) ? candidatePage : currentPage
             case "jump":
+                if (!canGoPage(action.jump)) return
                 return (0 < action.jump < maxPage) ? action.jump : currentPage
             default:
                 return currentPage
@@ -22,15 +52,21 @@ const usePagination = ({ maxPage }) => {
 
     const [ currentPage, dispatch ] = useReducer(reducer, 0);
 
-    const nextPage = () => dispatch({type: "next"})
-    const prevPage = () => dispatch({type: "back"})
-    const gotoPage = (pageNumber) => dispatch({type: "jump", jump: pageNumber})
+    const goNextPage = () => dispatch({type: "next"})
+    const goBackPage = () => dispatch({type: "back"})
+    const goJumpPage = (pageNumber) => dispatch({type: "jump", jump: pageNumber})
 
     return {
         currentPage,
-        nextPage,
-        prevPage,
-        gotoPage
+        currentView,
+        goNextPage,
+        goBackPage,
+        goJumpPage,
+        canGoNext,
+        setCanGoNext,
+        canGoBack,
+        setCanGoBack,
+        canGoPage
     }
 
 }
@@ -75,15 +111,11 @@ export const CardOccasion = ({ occasion = DEFAULT_OCCASION, occasionOnClick: onC
 
 const Paginator = ({ data, maxPerPage, className, children } = { maxPerPage: 1, className: "Paginator", data: [] }) => {
 
-    console.log("Paginator started");
-    console.log(data);
-    console.log(data.length);
-    console.log(maxPerPage);
-    console.log(`${data.length} / ${maxPerPage} = ${data.length / maxPerPage}`)
-
     const maxPage = Math.ceil(data.length / maxPerPage);
 
-    const { currentPage, nextPage, prevPage } = usePagination({ maxPage: maxPage });
+    //const { currentPage, nextPage, prevPage } = usePagination({ maxPage: maxPage });
+
+    const paginatorContext = createContext(usePagination({ data, maxPerPage }));
 
     useEffect(() => {
         console.log(`Current page now ${currentPage}`);
