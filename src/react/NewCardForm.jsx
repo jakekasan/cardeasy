@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, Children, cloneElement } from "react";
 
 
 const usePagination = ({ maxPage }) => {
@@ -31,7 +31,6 @@ const usePagination = ({ maxPage }) => {
 }
 
 const MultiPartForm = ({ children }) => {
-
     const [ isFormChildValid, setIsFormChildValid ] = useState(false);
 
     const { currentPage, nextPage, prevPage } = usePagination({ maxPage: children.length - 1});
@@ -59,10 +58,6 @@ const DEFAULT_OCCASIONS = occasionNames.map((name, i) => {
 
 const DEFAULT_OCCASION = { name: "Unknown Occasion" };
 
-const Occasion = (props) => {
-    return <div>{ props.data }</div>
-}
-
 export const CardOccasion = ({ occasion = DEFAULT_OCCASION, occasionOnClick: onClick}) => {
 
     const selected = (occasion.selected) ? " selected" : "";
@@ -73,17 +68,25 @@ export const CardOccasion = ({ occasion = DEFAULT_OCCASION, occasionOnClick: onC
     )
 }
 
-const Paginator = ({data, maxPerPage}) => {
+const Paginator = ({ data, maxPerPage, className} = { className: "Paginator"}) => {
+
+    const maxPage = Math.ceil(data.length / maxPerPage);
+
+    const { currentPage, nextPage, prevPage } = usePagination({ maxPage: maxPage });
+
+    useEffect(() => {
+        console.log(`Current page now ${currentPage}`);
+    },[currentPage])
+
+    const sliceFrom = currentPage * maxPerPage;
+    const sliceTo = currentPage * maxPerPage + maxPerPage;
+
     return (
-        <div>
-            <content>
-
-            </content>
-            <button></button>
-            <button></button>
-        </div>
-        
-
+        <section className={ className }>
+            { cloneElement(Children.only(this.children),{ data: data.slice(sliceFrom, sliceTo)})}
+            <button onClick={ prevPage }>Back</button>
+            <button onClick={ nextPage }>Next</button>
+        </section>
     )
 }
 
@@ -96,15 +99,15 @@ const SetOccasion = () => {
 
     return (
         <Paginator data ={ occasions }>
-            <Occasion />
+            <OccasionList />
         </Paginator>
     )
 }
 
 const NewCardForm = () => {
     return (
-        <NewCardForm>
+        <Paginator>
 
-        </NewCardForm>
+        </Paginator>
     )
 }
