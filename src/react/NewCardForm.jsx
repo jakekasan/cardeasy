@@ -2,7 +2,12 @@ import React, { useEffect, useReducer, Children, cloneElement } from "react";
 
 
 const usePagination = ({ maxPage }) => {
+    console.log(`usePagination - setting maxPage = ${maxPage}`)
     const reducer = (currentPage, action) => {
+        console.log("Reducer in usePagination called");
+        console.log(`Current page: ${currentPage}`)
+        console.log(action);
+
         switch (action.type) {
             case "next":
                 return (currentPage < maxPage) ? ++currentPage : currentPage
@@ -68,7 +73,13 @@ export const CardOccasion = ({ occasion = DEFAULT_OCCASION, occasionOnClick: onC
     )
 }
 
-const Paginator = ({ data, maxPerPage, className} = { className: "Paginator"}) => {
+const Paginator = ({ data, maxPerPage, className, children } = { maxPerPage: 1, className: "Paginator", data: [] }) => {
+
+    console.log("Paginator started");
+    console.log(data);
+    console.log(data.length);
+    console.log(maxPerPage);
+    console.log(`${data.length} / ${maxPerPage} = ${data.length / maxPerPage}`)
 
     const maxPage = Math.ceil(data.length / maxPerPage);
 
@@ -83,31 +94,63 @@ const Paginator = ({ data, maxPerPage, className} = { className: "Paginator"}) =
 
     return (
         <section className={ className }>
-            { cloneElement(Children.only(this.children),{ data: data.slice(sliceFrom, sliceTo)})}
+            { cloneElement(children,{ data: data.slice(sliceFrom, sliceTo)}) }
             <button onClick={ prevPage }>Back</button>
             <button onClick={ nextPage }>Next</button>
         </section>
     )
 }
 
+const Occasion = ({ name }) => <li className="Occasion">{ name }</li>
+
+const OccasionList = ({ data }) => {
+    return (
+        <ul className="OccasionList">
+            { data.map(occasion => <Occasion {...occasion} />)}
+        </ul>
+    )
+}
+
 const SetOccasion = () => {
+
     const [ occasions, setOccasions ] = useState([]);
 
     useEffect(() => {
-        // fetch data here
-    }, [])
+        let timeOut = setTimeout(() => setOccasions(DEFAULT_OCCASIONS), 3000)
+        return () => clearTimeout(timeOut);
+    }, []);
 
     return (
-        <Paginator data ={ occasions }>
+        <Paginator data ={ occasions } maxPerPage={ 10 }>
             <OccasionList />
         </Paginator>
     )
 }
 
-const NewCardForm = () => {
+const SetSender = () => {
     return (
-        <Paginator>
+        <>
+            <h5>Title</h5>
+            <p>Content</p>
+        </>
+    )
+}
 
+const JustRender = ({data}) => {
+    return (
+        <div>{ data }</div>
+    )
+}
+
+const NewCardForm = ({ children }) => {
+    console.log("NewCardForm rendering");
+    console.log(children);
+    children = [SetOccasion, SetSender]
+    return (
+        <Paginator data={ children } maxPerPage={ 1 }>
+            <JustRender/>
         </Paginator>
     )
 }
+
+export default NewCardForm;
