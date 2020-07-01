@@ -1,19 +1,5 @@
 import React, { useEffect, useReducer, Children, cloneElement, createContext, useState } from "react";
 
-class DataProvider {
-    constructor() {
-        this.#data = []
-    }
-
-    set data(data) {
-        this.#data = data;
-    }
-
-    get data(data) {
-        return this.#data
-    }
-}
-
 const usePagination = ({ data, maxPerPage }) => {
     console.log(`usePagination - setting maxPage = ${maxPage}`)
 
@@ -66,7 +52,8 @@ const usePagination = ({ data, maxPerPage }) => {
         setCanGoNext,
         canGoBack,
         setCanGoBack,
-        canGoPage
+        canGoPage,
+        dataSelection
     }
 
 }
@@ -115,7 +102,7 @@ const Paginator = ({ data, maxPerPage, className, children } = { maxPerPage: 1, 
 
     //const { currentPage, nextPage, prevPage } = usePagination({ maxPage: maxPage });
 
-    const paginatorContext = createContext(usePagination({ data, maxPerPage }));
+    const PaginatorContext = createContext({});
 
     useEffect(() => {
         console.log(`Current page now ${currentPage}`);
@@ -125,11 +112,13 @@ const Paginator = ({ data, maxPerPage, className, children } = { maxPerPage: 1, 
     const sliceTo = currentPage * maxPerPage + maxPerPage;
 
     return (
-        <section className={ className }>
-            { cloneElement(children,{ data: data.slice(sliceFrom, sliceTo)}) }
-            <button onClick={ prevPage }>Back</button>
-            <button onClick={ nextPage }>Next</button>
-        </section>
+        <PaginatorContext.Provider value={ usePagination({ data, maxPerPAge })}>
+            <section className={ className }>
+                { cloneElement(children,{ data: data.slice(sliceFrom, sliceTo)}) }
+                <button onClick={ prevPage }>Back</button>
+                <button onClick={ nextPage }>Next</button>
+            </section>
+        </PaginatorContext.Provider>
     )
 }
 
