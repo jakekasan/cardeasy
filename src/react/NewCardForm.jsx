@@ -1,6 +1,6 @@
-import React, { useEffect, useReducer, Children, cloneElement, createContext, useState } from "react";
+import React, { useEffect, useReducer, Children, cloneElement, createContext, useState, useContext } from "react";
 
-
+import { Paginator, PaginatorContext, BackButton, NextButton } from "./Paginator.jsx";
 
 const MultiPartForm = ({ children }) => {
     const [ isFormChildValid, setIsFormChildValid ] = useState(false);
@@ -18,7 +18,7 @@ const MultiPartForm = ({ children }) => {
     )
 }
 
-const occasionNames = ["Birthday", "New Child", "Anniversary", "Bar Mitzvah"];
+const occasionNames = ["Birthday", "New Child", "Anniversary", "Bar Mitzvah", "Funeral", "Wedding", "High School Graduation", "University Graduation", "Becoming a Grandparent", "Bereavement", "New Star Wars Movie", "Won Lottery"];
 
 const DEFAULT_OCCASIONS = occasionNames.map((name, i) => {
     return {
@@ -43,10 +43,11 @@ export const CardOccasion = ({ occasion = DEFAULT_OCCASION, occasionOnClick: onC
 
 const Occasion = ({ name }) => <li className="Occasion">{ name }</li>
 
-const OccasionList = ({ data }) => {
+const OccasionList = () => {
+    const { currentView } = useContext(PaginatorContext);
     return (
         <ul className="OccasionList">
-            { data.map(occasion => <Occasion {...occasion} />)}
+            { currentView.map(occasion => <Occasion key={occasion.id} {...occasion} />)}
         </ul>
     )
 }
@@ -63,6 +64,8 @@ const SetOccasion = () => {
     return (
         <Paginator data ={ occasions } maxPerPage={ 10 }>
             <OccasionList />
+            <BackButton />
+            <NextButton />
         </Paginator>
     )
 }
@@ -76,19 +79,24 @@ const SetSender = () => {
     )
 }
 
-const JustRender = ({data}) => {
+const JustRender = () => {
+    const { currentView } = useContext(PaginatorContext);
+    console.log("JustRender - currentView:");
+    console.log(currentView);
     return (
-        <div>{ data }</div>
+        <>{ currentView.map((item, i) => <div key={i}>{ item }</div>) }</>
     )
 }
 
 const NewCardForm = ({ children }) => {
     console.log("NewCardForm rendering, children:");
+    children = [<SetOccasion/>, <SetSender/>];
     console.log(children);
-    children = [SetOccasion, SetSender]
     return (
         <Paginator data={ children } maxPerPage={ 1 }>
             <JustRender/>
+            <BackButton/>
+            <NextButton/>
         </Paginator>
     )
 }
