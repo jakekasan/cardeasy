@@ -23,11 +23,11 @@ const usePagination = ({ data, maxPerPage }) => {
         switch (action.type) {
             case "next":
                 if (!canGoNext) return currentPage
-                candidatePage =  ++currentPage;
-                return (currentPage < maxPage) ? ++currentPage : currentPage
+                candidatePage = currentPage + 1;
+                return (currentPage < maxPage) ? candidatePage : currentPage
             case "back":
                 if (!canGoBack) return currentPage
-                candidatePage = --currentPage;
+                candidatePage = currentPage - 1;
                 return (candidatePage >= 0) ? candidatePage : currentPage
             case "jump":
                 if (!canGoPage(action.jump)) return
@@ -70,13 +70,13 @@ const PaginatorContext = createContext({});
 const BackButton = () => {
     const { goBackPage, canGoBack } = useContext(PaginatorContext);
 
-    return <button onClick={ goBackPage } disabled={ canGoBack }>Back</button>
+    return <button onClick={ goBackPage } { ...(canGoBack) ? null : { disabled: false }}>Back</button>
 }
 
 const NextButton = () => {
     const { goNextPage, canGoNext } = useContext(PaginatorContext);
 
-    return <button onClick={ goNextPage } disabled={ canGoNext }>Next</button>
+    return <button onClick={ goNextPage } { ...(canGoNext) ? null : { disabled: false }}>Next</button>
 }
 
 const Paginator = ({ data, maxPerPage, className, children } = { maxPerPage: 1, className: "Paginator", data: [] }) => {
@@ -88,4 +88,11 @@ const Paginator = ({ data, maxPerPage, className, children } = { maxPerPage: 1, 
             </PaginatorContext.Provider>
         </section>
     )
+}
+
+export {
+    Paginator,
+    PaginatorContext,
+    BackButton,
+    NextButton
 }
