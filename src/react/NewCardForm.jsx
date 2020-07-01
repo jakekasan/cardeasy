@@ -18,15 +18,16 @@ const usePagination = ({ data, maxPerPage }) => {
         console.log("Reducer in usePagination called");
         console.log(`Current page: ${currentPage}`)
         console.log(action);
+        let candidatePage;
 
         switch (action.type) {
             case "next":
                 if (!canGoNext) return currentPage
-                let candidatePage =  ++currentPage;
+                candidatePage =  ++currentPage;
                 return (currentPage < maxPage) ? ++currentPage : currentPage
             case "back":
                 if (!canGoBack) return currentPage
-                let candidatePage = --currentPage;
+                candidatePage = --currentPage;
                 return (candidatePage >= 0) ? candidatePage : currentPage
             case "jump":
                 if (!canGoPage(action.jump)) return
@@ -38,9 +39,18 @@ const usePagination = ({ data, maxPerPage }) => {
 
     const [ currentPage, dispatch ] = useReducer(reducer, 0);
 
+
+    useEffect(() => {
+        console.log(`Current page now ${currentPage}`);
+    },[currentPage])
+
+
     const goNextPage = () => dispatch({type: "next"})
     const goBackPage = () => dispatch({type: "back"})
     const goJumpPage = (pageNumber) => dispatch({type: "jump", jump: pageNumber})
+    const sliceFrom = currentPage * maxPerPage;
+    const sliceTo = sliceFrom + maxPerPage;
+    const currentView = data.slice(sliceFrom, sliceTo);
 
     return {
         currentPage,
@@ -52,8 +62,7 @@ const usePagination = ({ data, maxPerPage }) => {
         setCanGoNext,
         canGoBack,
         setCanGoBack,
-        canGoPage,
-        dataSelection
+        canGoPage
     }
 
 }
@@ -104,21 +113,12 @@ const Paginator = ({ data, maxPerPage, className, children } = { maxPerPage: 1, 
 
     const PaginatorContext = createContext({});
 
-    useEffect(() => {
-        console.log(`Current page now ${currentPage}`);
-    },[currentPage])
-
-    const sliceFrom = currentPage * maxPerPage;
-    const sliceTo = currentPage * maxPerPage + maxPerPage;
-
     return (
-        <PaginatorContext.Provider value={ usePagination({ data, maxPerPAge })}>
-            <section className={ className }>
-                { cloneElement(children,{ data: data.slice(sliceFrom, sliceTo)}) }
-                <button onClick={ prevPage }>Back</button>
-                <button onClick={ nextPage }>Next</button>
-            </section>
-        </PaginatorContext.Provider>
+        <section className={ className }>
+            <PaginatorContext.Provider value={ usePagination({ data, maxPerPage })}>
+                { children }
+            </PaginatorContext.Provider>
+        </section>
     )
 }
 
