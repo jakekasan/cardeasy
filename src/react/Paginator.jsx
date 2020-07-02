@@ -90,12 +90,21 @@ const BackButton = () => {
 const NextButton = () => {
     const { goNextPage, canGoNext } = useContext(PaginatorContext);
 
-    useEffect(() => {
-        console.log(`canGoNext: ${canGoNext}`)
-    })
-
     return <button className="NextButton" onClick={ goNextPage } { ...(canGoNext) ? null : { disabled: true }}>Next</button>
 }
+
+const BackBlade = () => {
+    const { goBackPage, canGoBack } = useContext(PaginatorContext);
+
+    return <button className="BackBlade" onClick={ goBackPage } { ...(canGoBack) ? null : { disabled: true }}>Back</button>
+}
+
+const NextBlade = () => {
+    const { goNextPage, canGoNext } = useContext(PaginatorContext);
+
+    return <button className="NextBlade" onClick={ goNextPage } { ...(canGoNext) ? null : { disabled: true }}>Next</button>
+}
+
 
 const Paginator = ({ data, maxPerPage, className, children } = { maxPerPage: 1, className: "Paginator", data: [] }) => {
 
