@@ -58,10 +58,20 @@ const OccasionList = () => {
 const SetOccasion = () => {
 
     const [ occasions, setOccasions ] = useState([]);
+    const { setCanGoNext } = useContext(PaginatorContext);
+    
 
     useEffect(() => {
-        let timeOut = setTimeout(() => setOccasions(DEFAULT_OCCASIONS), 3000)
-        return () => clearTimeout(timeOut);
+        console.log("Setting canGoNext to false");
+        setCanGoNext(() => false);
+        console.log("canGoNext set to false")
+        let timeOuts = [
+            setTimeout(() => setOccasions(DEFAULT_OCCASIONS), 3000),
+            setTimeout(() => setCanGoNext(true), 5000)
+        ];
+        
+        
+        return () => timeOuts.forEach(clearTimeout);
     }, []);
 
     return (
