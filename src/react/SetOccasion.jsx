@@ -4,7 +4,7 @@ import React, {
     useState
 } from "react";
 
-import { Paginator, BackButton, NextButton } from "./Paginator.jsx";
+import { Paginator, BackButton, NextButton, PaginatorContext } from "./Paginator.jsx";
 
 
 const occasionNames = ["Birthday", "New Child", "Anniversary", "Bar Mitzvah", "Funeral", "Wedding", "High School Graduation", "University Graduation", "Becoming a Grandparent", "Bereavement", "New Star Wars Movie", "Won Lottery"];
