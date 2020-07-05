@@ -7,6 +7,9 @@ module.exports = {
         filename: "index.js",
         path: path.join(__dirname, "./public/html")
     },
+    resolve: {
+        extensions: [ ".jsx", ".js" ]
+    },
     module: {
         rules: [
             {
