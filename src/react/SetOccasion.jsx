@@ -5,6 +5,7 @@ import React, {
 } from "react";
 
 import { Paginator, BackButton, NextButton, PaginatorContext } from "./Paginator.jsx";
+import { Title, Page, Content } from "./Layout.jsx";
 
 
 const occasionNames = ["Birthday", "New Child", "Anniversary", "Bar Mitzvah", "Funeral", "Wedding", "High School Graduation", "University Graduation", "Becoming a Grandparent", "Bereavement", "New Star Wars Movie", "Won Lottery"];
@@ -47,7 +48,7 @@ const OccasionList = () => {
 const SetOccasion = () => {
 
     const [ occasions, setOccasions ] = useState([]);
-    const { setCanGoNext } = useContext(PaginatorContext);
+    const { currentPage, setCanGoNext } = useContext(PaginatorContext);
     
     useEffect(() => {
         console.log("Setting canGoNext to false");
@@ -61,6 +62,16 @@ const SetOccasion = () => {
         return () => timeOuts.forEach(clearTimeout);
     }, []);
 
+    return (
+        <Content>
+            <Title>{ currentPage }: Choose an occasion for this card!</Title>
+            <Paginator data={ occasions } maxPerPage={ 10 }>
+                <OccasionList />
+                <BackButton />
+                <NextButton />
+            </Paginator>
+        </Content>
+    )
     return (
         <Paginator data ={ occasions } maxPerPage={ 10 }>
             <OccasionList />
