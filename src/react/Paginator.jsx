@@ -109,6 +109,13 @@ const NextBlade = () => {
 const Paginator = ({ data, maxPerPage, className, children } = { maxPerPage: 1, className: "Paginator", data: [] }) => {
 
     return (
+        <>
+            <PaginatorContext.Provider value={ usePagination({ data, maxPerPage })}>
+                { children }
+            </PaginatorContext.Provider>
+        </>
+    )
+    return (
         <section className="Paginator">
             <PaginatorContext.Provider value={ usePagination({ data, maxPerPage })}>
                 { children }
