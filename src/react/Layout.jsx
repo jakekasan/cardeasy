@@ -33,13 +33,24 @@ const Footer = () => {
         <footer>
             <h3>End of the page</h3>
         </footer>
-    )}
+    )
+}
 
-const Content = ({children}) => <main>{ children }</main>
+const Title = ({ text }) => {
+    return <h3 className="Title">{ text }</h3>
+}
+
+const Content = ({ children }) => {
+    return <main>{ children }</main>
+}
+
+const SubContent = ({children}) => <main className="SubContent">{ children }</main>
 
 export {
     Header,
     Footer,
     Content,
+    Title,
+    SubContent,
     Nav
 }
