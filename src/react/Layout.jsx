@@ -36,13 +36,15 @@ const Footer = () => {
     )
 }
 
-const Title = ({ text }) => {
-    return <h3 className="Title">{ text }</h3>
+const Title = ({ children }) => {
+    return <h3 className="title">{ children }</h3>
 }
 
 const Content = ({ children }) => {
-    return <main>{ children }</main>
+    return <section className="content">{ children }</section>
 }
+
+const TitledContent = ({ children }) => <article className="content">{ children }</article>
 
 const SubContent = ({children}) => <main className="SubContent">{ children }</main>
 
@@ -50,6 +52,7 @@ export {
     Header,
     Footer,
     Content,
+    TitledContent,
     Title,
     SubContent,
     Nav
