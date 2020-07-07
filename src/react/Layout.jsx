@@ -31,7 +31,7 @@ const Header = () => {
 const Footer = () => {
     return (
         <footer>
-            <h3>End of the page</h3>
+            <h3>&copy; Mosbius Designs Ltd.</h3>
         </footer>
     )
 }
