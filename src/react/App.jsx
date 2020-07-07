@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 import NewCardForm from "./NewCardForm.jsx";
-import { Header, Footer, Content, Nav } from "./Layout.jsx";
+import { Header, Footer, Content, TitledContent, Nav } from "./Layout.jsx";
 import "./Styles.sass";
 
 const PageNotFound = () => <h3>Oops...</h3>
@@ -24,7 +24,7 @@ const App = () => {
         <>
             <Router>
                 <Header />
-                <Content>
+                <TitledContent>
                     <Switch>
                         <Route exact path="/">
                             <SplashPage />
@@ -36,7 +36,7 @@ const App = () => {
                             <PageNotFound />
                         </Route>
                     </Switch>
-                </Content>
+                </TitledContent>
                 <Footer />
             </Router>
         </>
