@@ -5,7 +5,6 @@ const usePagination = ({ data, maxPerPage }) => {
 
     let calcMaxPage = (data, maxPerPage) => (data && data.length && data.length > 0) ? Math.ceil(data.length / maxPerPage) - 1 : 0;
 
-    console.log(`data.length = ${data.length}, data.length / maxPerPage should be ${data.length / maxPerPage}`)
     const [ maxPage, setMaxPage ] = useState(calcMaxPage(data, maxPerPage));
     const [ canGoBack, setCanGoBack ] = useState(false);
     const [ canGoNext, setCanGoNext ] = useState(false);
@@ -84,25 +83,25 @@ const PaginatorContext = createContext({});
 const BackButton = () => {
     const { goBackPage, canGoBack } = useContext(PaginatorContext);
 
-    return <button className="BackButton" onClick={ goBackPage } { ...(canGoBack) ? null : { disabled: true }}>Back</button>
+    return <button className="left bottom" onClick={ goBackPage } { ...(canGoBack) ? null : { disabled: true }}>Back</button>
 }
 
 const NextButton = () => {
     const { goNextPage, canGoNext } = useContext(PaginatorContext);
 
-    return <button className="NextButton" onClick={ goNextPage } { ...(canGoNext) ? null : { disabled: true }}>Next</button>
+    return <button className="right bottom" onClick={ goNextPage } { ...(canGoNext) ? null : { disabled: true }}>Next</button>
 }
 
 const BackBlade = () => {
     const { goBackPage, canGoBack } = useContext(PaginatorContext);
 
-    return <button className="BackBlade" onClick={ goBackPage } { ...(canGoBack) ? null : { disabled: true }}>Back</button>
+    return <button className="left aside" onClick={ goBackPage } { ...(canGoBack) ? null : { disabled: true }}>Back</button>
 }
 
 const NextBlade = () => {
     const { goNextPage, canGoNext } = useContext(PaginatorContext);
 
-    return <button className="NextBlade" onClick={ goNextPage } { ...(canGoNext) ? null : { disabled: true }}>Next</button>
+    return <button className="right aside" onClick={ goNextPage } { ...(canGoNext) ? null : { disabled: true }}>Next</button>
 }
 
 
@@ -115,18 +114,13 @@ const Paginator = ({ data, maxPerPage, className, children } = { maxPerPage: 1, 
             </PaginatorContext.Provider>
         </>
     )
-    return (
-        <section className="Paginator">
-            <PaginatorContext.Provider value={ usePagination({ data, maxPerPage })}>
-                { children }
-            </PaginatorContext.Provider>
-        </section>
-    )
 }
 
 export {
     Paginator,
     PaginatorContext,
     BackButton,
-    NextButton
+    NextButton,
+    BackBlade,
+    NextBlade
 }
