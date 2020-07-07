@@ -4,7 +4,7 @@ import React, {
     useState
 } from "react";
 
-import { Paginator, BackButton, NextButton, PaginatorContext } from "./Paginator.jsx";
+import { Paginator, BackButton, NextButton, PaginatorContext, BackBlade, NextBlade } from "./Paginator.jsx";
 import { Title, Page, Content } from "./Layout.jsx";
 
 
@@ -36,12 +36,9 @@ const OccasionList = () => {
     const { currentView } = useContext(PaginatorContext);
 
     return (
-        <article className="Content">
-            <h5>Select an occasion from the list!</h5>
-            <ul className="OccasionList">
-                { currentView.map(occasion => <Occasion key={occasion.id} {...occasion} />)}
-            </ul>
-        </article>
+        <ul className="content OccasionList">
+            { currentView.map(occasion => <Occasion key={occasion.id} {...occasion} />)}
+        </ul>
     )
 }
 
@@ -63,21 +60,16 @@ const SetOccasion = () => {
     }, []);
 
     return (
-        <Content>
-            <Title>{ currentPage }: Choose an occasion for this card!</Title>
-            <Paginator data={ occasions } maxPerPage={ 10 }>
-                <OccasionList />
-                <BackButton />
-                <NextButton />
-            </Paginator>
-        </Content>
-    )
-    return (
-        <Paginator data ={ occasions } maxPerPage={ 10 }>
-            <OccasionList />
-            <BackButton />
-            <NextButton />
-        </Paginator>
+        <>
+            <Title>{ currentPage + 1 }: Choose an occasion for this card!</Title>
+            <Content>
+                <Paginator data={ occasions } maxPerPage={ 10 }>
+                    <OccasionList />
+                    <BackBlade />
+                    <NextBlade />
+                </Paginator>
+            </Content>
+        </>
     )
 }
 
