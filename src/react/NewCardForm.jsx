@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, Children, cloneElement, createContext, useState, useContext } from "react";
 
 import { Paginator, PaginatorContext, BackButton, NextButton } from "./Paginator.jsx";
+import { Content } from "./Layout.jsx";
 import SetOccasion from "./SetOccasion.jsx";
 
 const SetSender = () => {
@@ -23,7 +24,9 @@ const SetCollaborators = () => {
 
 const JustRender = () => {
     const { currentView } = useContext(PaginatorContext);
+    const currentChild = Children.only(currentView[0]);
 
+    return <>{ currentChild }</>
     return (
         <>{ currentView.map((item, i) => <div className="Content" key={i}>{ item }</div>) }</>
     )
