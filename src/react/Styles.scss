@@ -1,0 +1,195 @@
+$dark: cornflowerblue;
+$light: azure;
+
+@mixin fontStyle {
+    font-weight: 600;
+    color: white;
+    font-size: 2.5rem;
+}
+
+body, html {
+    margin: 0px;
+    padding: 0px;
+    
+    * {
+        box-sizing: border-box;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+@mixin PageLayout {
+
+    .content {
+        box-sizing: border-box;
+        display: grid;
+        height: 100%;
+
+        .content {
+            grid-area: content;
+        }
+
+        .title {
+            grid-area: title;
+        }
+
+        .aside {
+            &.left {
+                grid-area: left-aside;
+            }
+
+            &.right {
+                grid-area: right-aside;
+            }
+
+        }
+        .bottom {
+            grid-area: bottom;
+
+            &.left {
+                grid-area: left-bottom;
+            }
+
+            &.right {
+                grid-area: right-bottom;
+            }
+        }
+    }
+
+    article.content {
+        grid-template-columns: 100px 1fr 1fr 100px;
+        grid-template-rows: 100px auto 50px;
+        grid-template-areas:
+            ". title title ."
+            "content content content content"
+            "left-bottom bottom bottom right-bottom";
+    }
+
+    section.content {
+        grid-template-columns: 100px 1fr 1fr 100px;
+        grid-template-rows: auto 50px;
+        grid-template-areas:
+            "left-aside content content right-aside"
+            "left-bottom bottom bottom right-bottom";
+    }
+}
+
+#App {
+    display: grid;
+    grid-template-rows: 200px auto 200px;
+    width: 100%;
+    height: 100%;
+
+    header {
+        width: 100vw;
+        background-color: $dark;
+        color: $light;
+        display: flex;
+        flex-direction: column;
+        align-content: space-evenly;
+        align-items: center;
+        
+        &, * {
+            @include fontStyle;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: row;
+        
+
+            * {
+                margin: 5px 20px;
+                padding: 5px;
+                text-decoration: none;
+
+                &:hover {
+                    background-color: teal;
+                }
+            }
+        }
+    }
+
+    & > article, & > section {
+        width: 700px;
+        margin: 0px auto;
+    }
+
+    @include PageLayout;
+
+    button {
+        border: 1px solid cornflowerblue;
+        background-color: cornflowerblue;
+        color: white;
+        font-weight: 300;
+        text-decoration: bold;
+        transition: 0.5s;
+
+        &:hover {
+            background-color: blue;
+        }
+    }
+
+    & > main {
+        width: 700px;
+        margin: 0px auto;
+        background-color: azure;
+
+        nav {
+            display: flex;
+            flex-direction: row;
+
+            * {
+                margin: 5px 20px;
+                text-decoration: none;
+            }
+
+            *:hover {
+                background-color: teal;
+            }
+        }
+}
+    footer {
+        width: 100vw;
+        height: 180px;
+        padding: 0 50px;
+        position: absolute;
+        bottom: 0;
+        background-color: $dark;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: end;
+        justify-content: end;
+        color: white;
+    }
+}
+
+.OccasionList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: 10px;
+    list-style: none;
+    margin: 0 10px;
+    padding: 0;
+
+    li {
+        border: 1px solid cornflowerblue;
+        padding: 20px;
+        grid-row: span 1;
+        grid-column: span 1;
+        transition: 1s;
+
+        &:hover {
+            background-color: lightblue
+        }
+    }
+}
