@@ -10,7 +10,7 @@ import {
 
 import NewCardForm from "./NewCardForm.jsx";
 import { Header, Footer, Content, TitledContent, Nav } from "./Layout.jsx";
-import "./Styles.sass";
+import "./Styles.scss";
 
 const PageNotFound = () => <h3>Oops...</h3>
 const SplashPage = () => {
