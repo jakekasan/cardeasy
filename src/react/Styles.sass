@@ -19,10 +19,41 @@ body
     height: 100vh
 
 @mixin PageLayout
-    display: grid
-    grid-template-columns: 50px 1fr 1fr 50px
-    grid-template-rows: 100px auto 100px
-    grid-template-areas: ". title title ." "left "
+
+    .content
+        box-sizing: border-box
+        display: grid
+        height: 100%
+
+        .content
+            grid-area: content
+
+        .title
+            grid-area: title
+
+        .aside
+            &.left
+                grid-area: left-aside
+            &.right
+                grid-area: right-aside
+        
+        .bottom
+            grid-area: bottom
+            &.left
+                grid-area: left-bottom
+            &.right
+                grid-area: right-bottom
+
+    article.content
+        grid-template-columns: 50px 1fr 1fr 50px
+        grid-template-rows: 100px auto 50px
+        grid-template-areas: ". title title ." "left-aside content content right-aside" "left-bottom bottom bottom right-bottom"
+
+    section.content
+        grid-template-columns: 50px 1fr 1fr 50px
+        grid-template-rows: auto 50px
+        grid-template-areas: "left-aside content content right-aside" "left-bottom bottom bottom right-bottom"
+
 
 #App
     display: grid
@@ -51,46 +82,34 @@ body
 
             *
                 margin: 5px 20px
+                padding: 5px
                 text-decoration: none
 
-            &:hover
-                background-color: teal
+                &:hover
+                    background-color: teal
 
-
-
-    main
+    & > article, & > section
         width: 700px
-        height: inherit
-        background-color: azure
         margin: 0px auto
 
-        .MultiPartForm
-            display: grid
-            grid-template-areas: "content content" "back next"
-            grid-template-rows: auto 100px
-            width: 100%
-            
-            article
-                grid-area: content
-                height: 100%
+    @include PageLayout
 
-            button
-                background-color: $dark
-                border: none
-                transition: 1s
-                margin: 20px 50px
-                border-radius: 25px
-                @include fontStyle
+    button
+        border: 1px solid cornflowerblue
+        background-color: cornflowerblue
+        color: white
+        font-weight: 300
+        text-decoration: bold
+        transition: 0.5s
 
+        &:hover
+            background-color: blue
+    
 
-                &:hover
-                    background-color: blue
-
-            .BackButton
-                grid-area: back
-            
-            .NextButton
-                grid-area: next
+    & > main
+        width: 700px
+        margin: 0px auto
+        background-color: azure
 
         nav
             display: flex
@@ -104,40 +123,35 @@ body
                 background-color: teal
 
 
-
     footer
         width: 100vw
-        height: 200px
+        height: 180px
+        padding: 0 50px
         position: absolute
         bottom: 0
         background-color: $dark
         display: flex
-        flex-direction: row
-        align-content: center
-        justify-content: center
-
-.Paginator
+        flex-direction: column-reverse
+        align-items: end
+        justify-content: end
+    
+.OccasionList
     display: grid
-    width: 100%
-    height: 100%
-    grid-template-columns: 50px auto 50px
-    grid-template-rows: 100px auto 50px
-    grid-template-areas: ". title ." "left-blade content right-blade" "back-button pagination next-button"
+    grid-template-columns: 1fr 1fr
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr
+    grid-gap: 10px
+    list-style: none
+    margin: 0 10px
+    padding: 0
 
-    & > .Title
-        grid-area: title
+    li
+        border: 1px solid cornflowerblue
+        padding: 20px
+        grid-row: span 1
+        grid-column: span 1
+        transition: 1s
 
-    & > .Content
-        grid-area: content
+        &:hover
+            background-color: lightblue
+            
 
-    & > .BackButton
-        grid-area: back-button
-
-    & > .NextButton
-        grid-area: next-button
-
-    & > .BackBlade
-        grid-area: back-blade
-
-    & > .NextBlade
-        grid-area: next-blade
