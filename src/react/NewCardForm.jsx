@@ -3,6 +3,7 @@ import React, { useEffect, useReducer, Children, cloneElement, createContext, us
 import { Paginator, PaginatorContext, BackButton, NextButton } from "./Paginator.jsx";
 import { Content } from "./Layout.jsx";
 import SetOccasion from "./SetOccasion.jsx";
+import SetDesign from "./SetDesign.jsx";
 
 const SetSender = () => {
     return (
@@ -27,13 +28,10 @@ const JustRender = () => {
     const currentChild = Children.only(currentView[0]);
 
     return <>{ currentChild }</>
-    return (
-        <>{ currentView.map((item, i) => <div className="Content" key={i}>{ item }</div>) }</>
-    )
 }
 
 const NewCardForm = ({ children }) => {
-    children = [<SetOccasion/>, <SetSender/>];
+    children = [<SetOccasion/>, <SetDesign/>, <SetSender/>];
     return (
         <Paginator data={ children } maxPerPage={ 1 }>
             <JustRender/>
