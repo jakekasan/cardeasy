@@ -60,6 +60,12 @@ body {
         }
     }
 
+    ul.slider {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+    }
+
     article.content {
         grid-template-columns: 100px 1fr 1fr 100px;
         grid-template-rows: 100px auto 50px;
@@ -105,14 +111,16 @@ body {
             display: flex;
             flex-direction: row;
         
-
             * {
                 margin: 5px 20px;
                 padding: 5px;
                 text-decoration: none;
+                transition: 0.5s;
+                border-radius: 10px;
 
                 &:hover {
-                    background-color: teal;
+                    background-color: whitesmoke;
+                    color: cornflowerblue;
                 }
             }
         }
@@ -134,7 +142,7 @@ body {
         transition: 0.5s;
 
         &:hover {
-            background-color: blue;
+            background-color: cornflowerblue;
         }
     }
 
@@ -153,7 +161,7 @@ body {
             }
 
             *:hover {
-                background-color: teal;
+                background-color: cornflowerblue;
             }
         }
 }
@@ -172,7 +180,7 @@ body {
     }
 }
 
-.OccasionList {
+.BlockList {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, 1fr);
@@ -186,10 +194,11 @@ body {
         padding: 20px;
         grid-row: span 1;
         grid-column: span 1;
-        transition: 1s;
+        transition: 0.5s;
 
         &:hover {
-            background-color: lightblue
+            background-color: cornflowerblue;
+            color: white;
         }
     }
 }
