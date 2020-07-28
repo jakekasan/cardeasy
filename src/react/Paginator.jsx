@@ -104,6 +104,12 @@ const NextBlade = () => {
     return <button className="right aside" onClick={ goNextPage } { ...(canGoNext) ? null : { disabled: true }}>Next</button>
 }
 
+const Slider = ({ sections = 10 }) => {
+    const {} = useContext(PaginatorContext);
+    return <ul className="slider bottom">
+        { new Array(sections).fill(0).map((_, index) => <li key={index}>{ index }</li>) }
+    </ul>
+}
 
 const Paginator = ({ data, maxPerPage, className, children } = { maxPerPage: 1, className: "Paginator", data: [] }) => {
 
@@ -122,5 +128,6 @@ export {
     BackButton,
     NextButton,
     BackBlade,
-    NextBlade
+    NextBlade,
+    Slider
 }
