@@ -1,8 +1,10 @@
 import React from "react";
 import { SectionTitle } from "../../../partials/SectionTitle.jsx";
 import { CardDesign } from "./cardDesign.jsx";
+import { Page } from "./../../../partials/Page.jsx";
+import { Paginator } from "../../../partials/Paginator.jsx";
 
-export const ChooseCardDesign = ({
+export const SetCardDesign = ({
     onChange,
     values,
     stepNumber
@@ -16,12 +18,7 @@ export const ChooseCardDesign = ({
                 stepNumber = { stepNumber }
                 title = { "Choose a card design!" }
                 /> */}
-            <ul>
-                <CardDesign />
-                <CardDesign />
-                <CardDesign />
-                <CardDesign />
-            </ul>
+            <Paginator />
         </Page>
     )
 }

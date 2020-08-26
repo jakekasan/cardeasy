@@ -1,0 +1,64 @@
+
+// .formParent {
+//     display: grid;
+//     box-sizing: border-box;
+//     width: 100%;
+//     /* max-height: 100%; */
+//     margin: 25px auto;
+//     padding: 25px 10%;
+//     grid-auto-columns: 1fr;
+//     grid-template-rows: 125px auto 50px;
+//     grid-template-areas:
+//         "form-title form-title form-title form-title"
+//         "form-part form-part form-part form-part"
+//         "form-back . . form-next"
+//     ;
+// }
+
+// .PersonDetails {
+//     display: grid;
+//     grid-template-columns: 1fr 2fr 1fr 2fr;
+// }
+
+// .PersonDetails input {
+//     padding: 12px;
+// }
+
+// .PersonDetails input:focus {
+//     border-color: tomato;
+// }
+
+// .formParent > * {
+//     margin: 0px;
+// }
+
+// .formParent h5 {
+//     grid-area: form-title;
+//     font-size: 2rem;
+//     text-decoration: underline;
+//     text-underline-offset: 15px;
+//     text-decoration-thickness: 3px;
+//     line-height: 1.5;
+// }
+
+// .formParent section {
+//     grid-area: form-part;
+// }
+
+// .formParent .backButton {
+//     grid-area: form-back;
+// }
+
+// .formParent .nextButton {
+//     grid-area: form-next;
+// }
+
+// .formParent textarea {
+//     resize: none;
+//     padding: 15px;
+// }
+
+
+@mixin formstuff {
+    background-color: chocolate;
+}

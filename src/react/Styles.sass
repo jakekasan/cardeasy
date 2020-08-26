@@ -44,16 +44,19 @@ body
             &.right
                 grid-area: right-bottom
 
+        ul.slider
+
     article.content
-        grid-template-columns: 50px 1fr 1fr 50px
+        grid-template-columns: 100px 1fr 1fr 100px
         grid-template-rows: 100px auto 50px
         grid-template-areas: ". title title ." "left-aside content content right-aside" "left-bottom bottom bottom right-bottom"
 
     section.content
         grid-template-columns: 50px 1fr 1fr 50px
         grid-template-rows: auto 50px
-        grid-template-areas: "left-aside content content right-aside" "left-bottom bottom bottom right-bottom"
-
+        grid-template-areas:\
+            "left-aside content content right-aside"
+            "left-bottom bottom bottom right-bottom"
 
 #App
     display: grid
@@ -122,7 +125,6 @@ body
             *:hover
                 background-color: teal
 
-
     footer
         width: 100vw
         height: 180px
@@ -134,11 +136,12 @@ body
         flex-direction: column-reverse
         align-items: end
         justify-content: end
+        color: white
     
 .OccasionList
     display: grid
     grid-template-columns: 1fr 1fr
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr
+    grid-template-rows: repeat(5, 1fr)
     grid-gap: 10px
     list-style: none
     margin: 0 10px

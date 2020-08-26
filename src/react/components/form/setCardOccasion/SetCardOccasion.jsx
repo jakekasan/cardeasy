@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CardOccasion } from "./CardOccasion.jsx";
+//import { CardOccasion } from "./CardOccasion.jsx";
 import { Page } from "./../../../partials/Page.jsx";
 
 const occasionNames = ["Birthday", "New Child", "Anniversary", "Bar Mitzvah"];
@@ -11,6 +11,18 @@ const DEFAULT_OCCASIONS = occasionNames.map((name, i) => {
         selected: false
     }
 })
+
+const DEFAULT_OCCASION = { name: "Unknown Occasion" };
+
+export const CardOccasion = ({ occasion = DEFAULT_OCCASION, occasionOnClick: onClick}) => {
+
+    const selected = (occasion.selected) ? " selected" : "";
+    return (
+        <li className={`CardOccasion${selected}`} id={ occasion.id } onClick={ () => onClick(occasion.id) }>
+            <p>{ occasion.name }</p>
+        </li>
+    )
+}
 
 export const SetCardOccasion = ({
     onChange,

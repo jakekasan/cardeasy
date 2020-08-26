@@ -21,7 +21,6 @@ html, .App, body {
                          "content content"
                          "footer footer"
     ;
-}
 
 #App header {
     grid-area: header;
@@ -31,6 +30,7 @@ html, .App, body {
     flex-direction: column;
     justify-content: center;
 }
+
 
 header h1 {
     text-align: center;
@@ -209,6 +209,11 @@ a.buttonStyle {
 
 .formParent .nextButton {
     grid-area: form-next;
+}
+
+.formParent textarea {
+    resize: none;
+    padding: 15px;
 }
 
 footer {
