@@ -1,37 +1,204 @@
-import React from "react";
+import React,
+{
+    useContext,
+    useEffect,
+    useState
+} from "react";
 import ReactDOM from "react-dom";
-// import { Route, BrowserRouter as Router } from "react-router-dom";
-// import Header from "./components/header.jsx";
-// import Footer from "./components/footer.jsx";
-// import SignExistingCard from "./components/signExistingCard/main.jsx";
-// import MakeNewCard from "./components/makeNewCard/main.jsx";
-// import { Home } from "./components/home.jsx";
-// import { Nav } from "./components/nav.jsx";
-// import About from "./components/about.jsx";
-// import { Test } from "./components/test.jsx";
-// import { NewCardForm } from "./components/form/NewCardForm.jsx";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Link,
+    Route
+} from "react-router-dom";
+import styled, { createGlobalStyle, ThemeProvider, ThemeContext } from "styled-components";
 
-//import styles from "./../sass/main.scss";
+import NewCard from "./NewCard";
+import DatePicker from "./DatePicker";
+import { TitleElement, TitledContent } from "./Layout";
 
-//import "./App.css";
-//import "./../sass/main.scss";
+const NavElement = styled.nav`
+    background-color: ${props => props.theme.colors.dark.primary};
+    width: ${props => props.theme.appWidth}px;
 
-// const App = () => {
-//     return (
-//         <>
-//             <Header />
-//             <Router>
-//                 <Nav />
-//                 <Route exact path="/" component= { Home } />
-//                 <Route path="/sign" component = { SignExistingCard }/>
-//                 <Route path="/new" component = { NewCardForm } />
-//                 <Route path="/about" component = { Test } />
-//             </Router>
-//             <Footer />
-//         </>
-//     )
-// };
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 
-import App from "./App.jsx";
+    & a {
+        color: ${props => props.theme.colors.dark.secondary};
+        transition: 0.5s;
+        border-radius: 25px;
+        padding: 10px;
+        text-decoration: none;
+        color: ${props => props.theme.colors.dark.secondary};
+    }
+    
+    & a:hover {
+        background: white;
+        color: ${props => props.theme.colors.dark.primary};
+        transition: 0.5s;
+    };
 
-ReactDOM.render(<App />, document.querySelector("#App"));
+`;
+
+const NavItem = ({ to, children }) => {
+    return (
+        <Link to={ to }>
+            { children }
+        </Link>
+    )
+}
+
+const HeaderElement = styled.header`
+    width: 100vw;
+    padding: 20px 0px;
+    display: grid;
+    place-items: center;
+    background-color: ${props => props.theme.colors.dark.primary};
+`;
+
+
+const Header = () => {
+    return (
+        <HeaderElement>
+            <NavElement>
+                <NavItem to="/">CardEasy</NavItem>
+                <NavItem to="/new">New Card</NavItem>
+                <NavItem to="/sign">Sign Card</NavItem>
+                <NavItem to="/about">About</NavItem>
+            </NavElement>
+        </HeaderElement>
+    )
+}
+
+const Content = () => {
+
+    const { appWidth } = useContext(ThemeContext);
+
+    return (
+        <TitledContent>
+            <TitleElement>This is a title</TitleElement>
+            <p>
+                { `The #App element should be ${appWidth} px wide` }
+            </p>
+        </TitledContent>
+    )
+}
+
+
+const GlobalStyle = createGlobalStyle`
+    body {
+        background: ${props => props.theme.colors.dark.secondary};
+        margin: 0;
+        padding: 0;
+        display: grid;
+        place-items: center;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+        &, & * {
+            box-sizing: border-box;
+        }
+    }
+
+    #App {
+        width: 100vw;
+        min-height: 100vh;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+`;
+
+
+const useTheme = () => {
+    
+    const [size, setSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+    
+    useEffect(() => {
+        let handleResize = () => {
+
+            const { innerWidth: width, innerHeight: height } = window;
+
+            setSize({
+                width,
+                height
+            });
+        }
+        
+        window.addEventListener("resize", handleResize);
+        
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        }
+    })
+    
+    const bindWidth = (width) => {
+        switch (true) {
+            case width > 850:
+                return 800
+            case width > 450:
+                return 400
+            default:
+                return 300
+        }
+    }
+
+    return {
+        appWidth: bindWidth(size.width),
+        colors: {
+            dark: {
+                primary: "black",
+                secondary: "white",
+                tertiary: "lightgray",
+                hover: "darkgray",
+                selected: "gray"
+            }
+        }
+    }
+}
+
+const PlaceHolder = () => {
+    return (
+        <TitledContent>
+            <TitleElement>Title goes here...</TitleElement>
+            <section>
+                <h5>Subheadring</h5>
+                <p>Much stuff!!</p>
+            </section>
+        </TitledContent>
+    )
+}
+
+const Main = styled.main`
+    width: ${props => props.theme.appWidth}px;
+    margin: 0 auto;
+    padding: 10px;
+    flex-grow: 1;
+`;
+
+const App = () => {
+
+    const theme = useTheme();
+
+    return (
+        <Router>
+            <ThemeProvider theme={ theme }>
+                <GlobalStyle />
+                <Header />
+                <Main>
+                    <Switch>
+                        <Route exact path="/" component={ PlaceHolder }/>
+                        <Route path="/new" component={ NewCard }/>
+                        <Route path="/datepicker" component={ DatePicker } />
+                    </Switch>
+                </Main>
+            </ThemeProvider>
+        </Router>
+    )
+}
+
+ReactDOM.render(<App/>, document.getElementById("App"));

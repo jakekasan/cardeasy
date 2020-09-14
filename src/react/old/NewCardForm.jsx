@@ -41,4 +41,21 @@ const NewCardForm = ({ children }) => {
     )
 }
 
+
+const FormStep = () => {
+    return (
+        <div>
+            <FormStepTitle />
+            <FormStepContent />
+        </div>
+    )
+}
+
+const Form = () => {
+    return (
+        <>
+        </>
+    )
+}
+
 export default NewCardForm

@@ -1,59 +1,23 @@
 import React from "react";
-import {
-    BrowserRouter as Router,
-    Link,
-    useLocation
-} from "react-router-dom";
+import styled from "styled-components";
 
-const Nav = () => {
-    return (
-        <nav>
-            <Link to="/new">New</Link>
-            <Link to="/sign">Sign</Link>
-            <Link to="/about">About</Link>
-        </nav>
-    )
-}
+const TitleElement = styled.h2`
+    display: grid;
+    place-items: center;
+    color: ${props => props.theme.colors.dark.primary};
+    text-decoration: underline;
+    line-height: 2.5rem;
+    text-underline-offset: 10px;
+`;
 
-const MainLogo = () => <h1>CardEasy</h1>
-
-const Header = () => {
-    const location = useLocation();
-
-    return (
-        <header>
-            <MainLogo title={ "Cardeasy" } />
-            { (location.pathname == "/" ) ? undefined : <Nav /> }
-        </header>
-    )
-}
-
-const Footer = () => {
-    return (
-        <footer>
-            <h3>&copy; Mosbius Designs Ltd.</h3>
-        </footer>
-    )
-}
-
-const Title = ({ children }) => {
-    return <h3 className="title">{ children }</h3>
-}
-
-const Content = ({ children }) => {
-    return <section className="content">{ children }</section>
-}
-
-const TitledContent = ({ children }) => <article className="content">{ children }</article>
-
-const SubContent = ({children}) => <main className="SubContent">{ children }</main>
+const TitledContent = styled.article`
+    width: ${props => props.theme.appWidth}px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+`;
 
 export {
-    Header,
-    Footer,
-    Content,
-    TitledContent,
-    Title,
-    SubContent,
-    Nav
+    TitleElement,
+    TitledContent
 }

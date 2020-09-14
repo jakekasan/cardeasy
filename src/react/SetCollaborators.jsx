@@ -1,58 +1,142 @@
-import React, { useRef, useState, useContext, useCallback, useEffect } from "react";
-import { Title, Content } from "./Layout";
-import { PaginatorContext, Paginator } from "./Paginator";
+import React, { useContext, useState, useEffect } from "react";
+import styled from "styled-components";
 
-const Collaborator = ({ index, name, email, onChange }) => {
-    return (
-        <>
-            <label htmlFor="name"></label>
-            <input data-index={ index } type="text" name="name" value={ name } onChange={ onChange }/>
-            <label htmlFor="email"></label>
-            <input data-index={ index } type="email" name="email" value ={ email } onChange={ onChange }/>
-        </>
-    )
-}
+import { StoreContext } from "./FormDataStore";
+import { TitledContent, TitleElement } from "./Layout";
 
-const CollaboratorList = () => {
+const CollaboratorListContainer = styled.div`
+    height: 60vh;
+    overflow:scroll;
+    /* box-shadow: 2px 2px grey inset; */
+    /* border: 1px solid grey; */
+    padding: 10px 5px;
+`;
 
-    const [ collaborators, setCollaborators ] = useState([]);
+const CollaboratorList = styled.ul`
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    /* min-height: 60vh; */
+`;
 
-    const collaboratorOnChange = useCallback((event) => {
-        const {
-            target: {
-                name,
-                value,
-                datasetIndex: index }
-        } = event;
+const Collaborator = styled.li`
+    display: flex;
+    flex-direction: row;
+`;
 
-        setCollaborators((currentCollaborators) => {
-            let currentCollaborator = currentCollaborators[index];
-            currentCollaborators[index] = {...currentCollaborator, [name]: value };
-            return currentCollaborators
-        })
+const CollaboratorField = styled.div`
+    display: grid;
+    place-items: center;
+    position: relative;
+    margin: 15px;
+`;
+
+const Input = styled.input`
+    padding: 5px;
+    height: 25px;
+
+    /* &:focus + label {
+        color: blue;
+        top: -25px;
+        left: -25px;
+        transition: 0.2s;
+        opacity: 0.5;
+    } */
+`;
+
+// const Label = styled.label`
+//     position: absolute;
+//     top: 5px;
+//     left: 50px;
+//     transition: 0.2s;
+//     opacity: 0;
+// `;
+
+const Label = styled.label`
+    position: absolute;
+    top: -15px;
+    left: 0px;
+    font-size: 0.5rem;
+    opacity: 0.5;
+`;
+
+
+const EditableList = () => {
+    const { get, set } = useContext(StoreContext);
+    const [collaborators, setCollaborators] = useState(() => {
+        let currentCollabs = get("collaborators");
+        if (currentCollabs == undefined) {
+            console.log({currentCollabs});
+            return [{name: "", email: ""}]
+        } else {
+            return currentCollabs
+        }
     })
 
     useEffect(() => {
-        setCollaborators((currentCollaborators) => currentCollaborators.filter(collaborator => collaborator.name !== "" && collaborator.email !== ""))
-    }, [collaborators])
+        console.log({collaborators});
+        return () => set("collaborators", collaborators)
+    }, [collaborators]);
+
+    const onChange = (i, type, value) => {
+        setCollaborators(collabs => {
+            collabs[i][type] = value;
+            let newCollabs = collabs.filter(item => !(item.name === "" && item.email === ""))
+            if (collabs.length < 8) {
+                newCollabs.push({name: "", email: ""})
+            }
+            return newCollabs
+        })
+    }
 
     return (
-        <ul>
-            { collaborators.map((collaborator, i) => <Collaborator {...collaborator} onChange={  } />) }
-        </ul>
+        <CollaboratorList>
+            {
+                collaborators
+                    .map((item, i) => {
+                        return (
+                            <Collaborator key={ i }>
+                                {
+                                    Object.entries(item)
+                                        .map(([key, value]) => {
+                                            console.log({key, value});
+
+                                            let type = (key !== "name") ? "email" : key;
+                                            let label = (key !== "name") ? "Email:" : "Name:"
+                                            let id = `${key}_${i}`;
+                                            return (
+                                                <CollaboratorField key={ id }>
+                                                    <Input
+                                                        type="text"
+                                                        id={ id }
+                                                        onChange={ (event) => onChange(i, key, event.target.value) }
+                                                        value={ value }/>
+                                                    <Label htmlFor={ id }>{ label }</Label>
+                                                </CollaboratorField>
+                                            )
+                                        })
+                                }
+                            </Collaborator>
+                            )
+                    })
+            }
+                                        
+        </CollaboratorList>
     )
 }
 
-export const SetCollaborators = () => {
-    const { currentPage } = useContext(PaginatorContext);
-
+const SetCollaborators = () => {
     return (
-        <>
-            <Title>{ currentPage + 1 }: Add the people you'd like to sign this card with you!</Title>
-            <Content>
-
-            </Content>
-        </>
+        <TitledContent>
+            <TitleElement>{ "This is a title" }</TitleElement>
+            <CollaboratorListContainer>
+                <EditableList />
+            </CollaboratorListContainer>
+        </TitledContent>
     )
-
 }
+
+export default SetCollaborators;
