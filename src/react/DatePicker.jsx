@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { StoreContext } from "./FormDataStore";
+import { getTomorrow, StoreContext } from "./FormDataStore";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -206,14 +206,15 @@ const Calendar = ({ currentMonth, dates, selectedDate, setSelectedDate }) => {
     )
 }
 
-const DatePicker = () => {
+const DatePicker = ({ chosenDate = getTomorrow() } = {}) => {
 
     const { get, set } = useContext(StoreContext);
-    let today = get("sendDatetime") || new Date();
+    //let today = chosenDate;
+    let today = get("sendDatetime");
     const [year, setYear] = useState(today.getFullYear());
     const [month, setMonth] = useState(today.getMonth());
     const [dates, setDates] = useState(() => matchMonth(year, month));
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(today);
     
     useEffect(() => {
         console.log("year,month useEffect", {selectedDate});
@@ -222,7 +223,13 @@ const DatePicker = () => {
 
     useEffect(() => {
         console.log("selectedDate useEffect",{selectedDate});
-        return () => console.log("Result:", {selectedDate})
+        return () => {
+            let newDt = new Date(get("sendDatetime"));
+            newDt.setDate(selectedDate.getDate());
+            newDt.setMonth(selectedDate.getMonth());
+            newDt.setFullYear(selectedDate.getFullYear());
+            set("sendDatetime", newDt);
+        }
     }, [selectedDate])
 
     const handleMonthChange = (event) => {
