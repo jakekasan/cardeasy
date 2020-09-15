@@ -101,6 +101,17 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
     #App {
         width: 100vw;
         min-height: 100vh;
