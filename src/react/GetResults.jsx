@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { StoreContext } from "./FormDataStore";
@@ -25,16 +25,15 @@ const ResultsItemElement = styled.div`
 `;
 
 const ResultsItemTitle = styled.h5`
-    flex: 1 1 0;
+    /* flex: 1 1 0; */
     margin: 0;
     padding: 0;
 `;
 
 const ResultsItemContent = styled.section`
-    flex: 3 1 0;
+    /* flex: 2 1 0; */
     margin: 0;
     padding: 0;
-    background-color: ${props => props.theme.colors.dark.tertiary};
     display:grid;
     place-items: center;
 `;
@@ -50,22 +49,100 @@ const ResultsItem = ({ title, children }) => {
 
 const OccasionResults = ({ occasionId }) => {
     const { occasions: { getById }} = useContext(DataStoreContext);
-    const { text: occasionName } = getById(occasionId);
+    const [text, setText] = useState("");
+
+    useEffect(() => {
+        getById(occasionId)
+            .then(occasion => setText(occasion.text))
+            .catch(() => {
+                console.log(`Can't find occasion with id ${occasionId}`);
+                setText("< none >")
+            })
+    }, [])
 
     return (
-        <ResultsItem title={ "Occasion" }>
-            <p>{ occasionName }</p>
+        <ResultsItem title={ "Occasion:" }>
+            <p>{ text }</p>
         </ResultsItem>
     )
 }
 
 const DesignResults = ({ designId }) => {
     const { designs: { getById }} = useContext(DataStoreContext);
-    const { text: designName } = getById(designId);
+    const [text, setText] = useState("");
+    
+    useEffect(() => {
+        getById(designId)
+            .then(design => setText(design.text))
+            .catch(() => {
+                console.log(`Can't find design with id ${designId}`);
+                setText("< none >")
+            })
+    }, [])
 
     return (
-        <ResultsItem title={ "Design" }>
-            <p>{ designName }</p>
+        <ResultsItem title={ "Design:" }>
+            <p>{ text }</p>
+        </ResultsItem>
+    )
+}
+
+const Collaborators = styled.ul`
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+`;
+
+const Collaborator = styled.li`
+
+`;
+
+const CollabName = styled.p`
+    color: gray;
+`;
+
+const CollabEmail = styled(CollabName);
+
+const CollaboratorsResults = ({ collaborators }) => {
+
+    if (collaborators === undefined || collaborators.length) {
+        return null
+    }
+
+    return (
+        <ResultsItem title={ "Collaborators:"}>
+            <Collaborators>
+                { collaborators.map(collab => {
+                    return (
+                        <Collaborator>
+                            <CollabName>
+                                { collab.name }
+                            </CollabName>
+                            <CollabEmail>
+                                { collab.email }
+                            </CollabEmail>
+                        </Collaborator>
+                    )
+                }) }
+            </Collaborators>
+        </ResultsItem>
+    )
+}
+
+const SendTimeResults = ({ sendDatetime }) => {
+    return (
+        <ResultsItem title="Send date:">
+            <p>{ sendDatetime.toString() }</p>
+        </ResultsItem>
+    )
+}
+
+const MessageResults = ({ message }) => {
+    return (
+        <ResultsItem title="Card message:">
+            <p>{ message }</p>
         </ResultsItem>
     )
 }
@@ -89,6 +166,9 @@ const GetResults = () => {
             <ResultsView>
                 <DesignResults designId={ design } />
                 <OccasionResults occasionId={ occasion } />
+                <CollaboratorsResults collaborators={ collaborators } />
+                <SendTimeResults sendDatetime={ sendDatetime } />
+                <MessageResults message={ message } />
             </ResultsView>
         </TitledContent>
     )
