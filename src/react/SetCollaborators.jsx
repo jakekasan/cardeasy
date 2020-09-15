@@ -64,17 +64,19 @@ const Label = styled.label`
     opacity: 0.5;
 `;
 
+const fixCollabs = (collabs) => {
+    let newCollabs = collabs.filter(item => !(item.name === "" && item.email === ""))
+    if (collabs.length < 8) {
+        newCollabs.push({name: "", email: ""})
+    }
+    return newCollabs
+}
 
 const EditableList = () => {
     const { get, set } = useContext(StoreContext);
     const [collaborators, setCollaborators] = useState(() => {
         let currentCollabs = get("collaborators");
-        if (currentCollabs == undefined) {
-            console.log({currentCollabs});
-            return [{name: "", email: ""}]
-        } else {
-            return currentCollabs
-        }
+        return fixCollabs(currentCollabs);
     })
 
     useEffect(() => {
@@ -85,10 +87,7 @@ const EditableList = () => {
     const onChange = (i, type, value) => {
         setCollaborators(collabs => {
             collabs[i][type] = value;
-            let newCollabs = collabs.filter(item => !(item.name === "" && item.email === ""))
-            if (collabs.length < 8) {
-                newCollabs.push({name: "", email: ""})
-            }
+            let newCollabs = fixCollabs(collabs);
             return newCollabs
         })
     }
