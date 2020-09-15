@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { StoreContext } from "./FormDataStore";
 
@@ -31,8 +31,7 @@ const Strong = styled.strong`
 const TimePicker = () => {
 
     const { get, set } = useContext(StoreContext);
-    const chosenDatetime = get("sendDatetime") || new Date();
-
+    const chosenDatetime = get("sendDatetime");
     const [minutes, setMinutes] = useState(chosenDatetime.getMinutes());
     const [hours, setHours] = useState(chosenDatetime.getHours());
 
@@ -60,6 +59,19 @@ const TimePicker = () => {
         })
     }
 
+    useEffect(() => {
+        let oldDt = new Date(chosenDatetime);
+        oldDt.setHours(hours);
+        oldDt.setMinutes(minutes);
+        set("sendDatetime", oldDt);
+    }, [minutes, hours])
+
+    // const padNumber = (number) => {
+    //     return String(number).padStart(2, "0")
+    // }
+
+    // const isPaddable = (number) => String(number).length < 2
+
     return (
         <TimeContainer>
             <TimeInputContainer>
@@ -71,7 +83,7 @@ const TimePicker = () => {
                     onChange={ hourOnChange }/>
                 <Strong>:</Strong>
                 <TimeInput
-                    type="text"
+                    type="number"
                     name="minute"
                     id="minute"
                     value={ minutes }
