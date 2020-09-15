@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import DatePicker from "./DatePicker";
 import TimePicker from "./TimePicker";
 import { TitleElement, TitledContent } from "./Layout";
+import { PaginationContext } from "./Pagination";
 
 const DateTimePickers = styled.div`
     display: flex;
@@ -14,9 +15,11 @@ const DateTimePickers = styled.div`
 `;
 
 const SetSendDetails = () => {
+    const { currentPage } = useContext(PaginationContext);
+    const title = `Step ${currentPage}: When would you like the card delivered?`;
     return (
         <TitledContent>
-            <TitleElement>Set the date and time you want the card to be sent:</TitleElement>
+            <TitleElement>{ title }</TitleElement>
             <DateTimePickers>
                 <DatePicker />
                 <TimePicker />
