@@ -18,7 +18,15 @@ const TimeInputContainer = styled.div`
 const TimeInput = styled.input`
     padding: 5px;
     width: 50px;
+    text-align: center;
+    font-size: 1.5rem;
 `;
+
+const Strong = styled.strong`
+    font-size: 1.5rem;
+    padding: 5px;
+`;
+
 
 const TimePicker = () => {
 
@@ -61,7 +69,7 @@ const TimePicker = () => {
                     id="hour"
                     value={ hours }
                     onChange={ hourOnChange }/>
-                :
+                <Strong>:</Strong>
                 <TimeInput
                     type="text"
                     name="minute"
