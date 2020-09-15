@@ -12,6 +12,8 @@ import SetDesign from "./SetDesign";
 import SetCollaborators from "./SetCollaborators";
 import SetMessage from "./SetMessage";
 import SetSendDetails from "./SetSendDetails";
+import GetResults from "./GetResults";
+import InfoDataStore from "./InfoDataStores";
 
 const NewCard = () => {
     const { get, set, getAll } = useFormDataStore({});
@@ -19,13 +21,16 @@ const NewCard = () => {
 
     return (
         <StoreContext.Provider value={ {get, set, getAll} }>
-            <Pagination onLast={ onSubmit }>
-                <SetDesign />
-                <SetOccasion />
-                <SetCollaborators />
-                <SetSendDetails />
-                <SetMessage />
-            </Pagination>
+            <InfoDataStore>
+                <Pagination onLast={ onSubmit }>
+                    <SetDesign />
+                    <SetOccasion />
+                    <SetCollaborators />
+                    <SetSendDetails />
+                    <SetMessage />
+                    <GetResults />
+                </Pagination>
+            </InfoDataStore>
         </StoreContext.Provider>
     )
 }
