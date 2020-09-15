@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { StoreContext } from "./FormDataStore";
 import { TitledContent, TitleElement } from "./Layout";
+import { PaginationContext } from "./Pagination";
 
 const CollaboratorListContainer = styled.div`
     height: 60vh;
@@ -129,9 +130,11 @@ const EditableList = () => {
 }
 
 const SetCollaborators = () => {
+    const { currentPage } = useContext(PaginationContext);
+    const title = `Step ${currentPage + 1}: Enter the details of co-signers:`;
     return (
         <TitledContent>
-            <TitleElement>{ "This is a title" }</TitleElement>
+            <TitleElement>{ title }</TitleElement>
             <CollaboratorListContainer>
                 <EditableList />
             </CollaboratorListContainer>
