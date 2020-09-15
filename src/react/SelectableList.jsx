@@ -27,6 +27,8 @@ const UnSelectedItem = styled.li`
     flex-direction: row;
     flex-wrap: wrap;
     transition: 0.2s;
+    font-weight: 800;
+    cursor: pointer;
 
     &:hover {
         transition: 0.2s;
