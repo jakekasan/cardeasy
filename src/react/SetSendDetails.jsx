@@ -16,7 +16,7 @@ const DateTimePickers = styled.div`
 
 const SetSendDetails = () => {
     const { currentPage } = useContext(PaginationContext);
-    const title = `Step ${currentPage}: When would you like the card delivered?`;
+    const title = `Step ${currentPage + 1}: When would you like the card delivered?`;
     return (
         <TitledContent>
             <TitleElement>{ title }</TitleElement>

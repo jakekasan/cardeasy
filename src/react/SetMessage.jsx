@@ -17,7 +17,7 @@ const SetMessage = () => {
     const { currentPage } = useContext(PaginationContext);
     const { get, set } = useContext(StoreContext);
     const [ text, setText ] = useState(() => get("message"))
-    const title = `Step ${currentPage}: What would you like the card to say?`;
+    const title = `Step ${currentPage + 1}: What would you like the card to say?`;
 
     useEffect(() => {
         return () => set("message", text);
