@@ -15,6 +15,7 @@ const TitledContent = styled.article`
     margin: auto;
     display: flex;
     flex-direction: column;
+    min-height: 60vh;
 `;
 
 export {
