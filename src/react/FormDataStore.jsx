@@ -53,10 +53,11 @@ const StoreContext = React.createContext({
     set: () => console.log("set is not set")
 });
 
-
+const FormDataStoreContext = StoreContext;
 
 export {
     useFormDataStore,
     StoreContext,
+    FormDataStoreContext,
     getTomorrow
 }
