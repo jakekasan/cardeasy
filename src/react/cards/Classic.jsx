@@ -84,9 +84,10 @@ const Classic = ({
             <Greeting recipient={ recipient } />
             <Message>{ `These people wanted to wish you a happy ${occasion}` }</Message>
             <Signed>
-                { [{...sender, message: message }].concat(collaborators).map(collab => {
+                { [{...sender, message: message }]
+                    .concat(collaborators).map((collab, i) => {
                     return (
-                        <Collaborator {...collab} key={ collab.email } />
+                        <Collaborator {...collab} key={ i } />
                     )
                 })}
             </Signed>
