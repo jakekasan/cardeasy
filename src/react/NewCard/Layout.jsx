@@ -12,7 +12,7 @@ const TitleElement = styled.h2`
 
 const TitledContent = styled.article`
     width: ${props => props.theme.appWidth}px;
-    margin: auto;
+    margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 60vh;
