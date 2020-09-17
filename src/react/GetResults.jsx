@@ -5,6 +5,8 @@ import { StoreContext } from "./FormDataStore";
 import { DataStoreContext } from "./InfoDataStores";
 import { TitleElement, TitledContent } from "./Layout";
 
+import Classic from "./cards/Classic";
+
 const ResultsView = styled.section`
     display: flex;
     flex-direction: row;
@@ -150,13 +152,11 @@ const MessageResults = ({ message }) => {
 const GetResults = () => {
 
     const { getAll } = useContext(StoreContext);
-    const {
-        design,
-        occasion,
-        collaborators,
-        sendDatetime,
-        message
-    } = getAll();
+    const formData = getAll();
+
+    useEffect(() => {
+        console.log(formData);
+    }, []);
 
     const { designs: { getById: designById }, occasions: { getById: occasionById} } = useContext(DataStoreContext)
 
@@ -164,11 +164,20 @@ const GetResults = () => {
         <TitledContent>
             <TitleElement>Check what you're about to send!</TitleElement>
             <ResultsView>
-                <DesignResults designId={ design } />
-                <OccasionResults occasionId={ occasion } />
-                <CollaboratorsResults collaborators={ collaborators } />
-                <SendTimeResults sendDatetime={ sendDatetime } />
-                <MessageResults message={ message } />
+                <Classic {...formData} />
+            </ResultsView>
+
+
+        </TitledContent>
+    )
+}
+
+export const SampleResult = ({ children }) => {
+    return (
+        <TitledContent>
+            <TitleElement>Check what you're about to send!</TitleElement>
+            <ResultsView>
+                { children }
             </ResultsView>
         </TitledContent>
     )
