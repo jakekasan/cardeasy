@@ -64,8 +64,10 @@ const Label = styled.label`
     opacity: 0.5;
 `;
 
+const filterEmptyCollabs = (collabs) => collabs.filter(item => !(item.name === "" && item.email === ""))
+
 const fixCollabs = (collabs) => {
-    let newCollabs = collabs.filter(item => !(item.name === "" && item.email === ""))
+    let newCollabs = filterEmptyCollabs(collabs);
     if (collabs.length < 8) {
         newCollabs.push({name: "", email: ""})
     }
@@ -87,7 +89,7 @@ const EditableList = () => {
     const onChange = (i, type, value) => {
         setCollaborators(collabs => {
             collabs[i][type] = value;
-            let newCollabs = fixCollabs(collabs);
+            let newCollabs = filterEmptyCollabs(collabs);
             return newCollabs
         })
     }
