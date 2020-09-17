@@ -5,7 +5,7 @@ import { StoreContext } from "./FormDataStore";
 import { DataStoreContext } from "./InfoDataStores";
 import { TitleElement, TitledContent } from "./Layout";
 
-import Classic from "./cards/Classic";
+import Classic from "./../cards/Classic";
 
 const ResultsView = styled.section`
     display: flex;

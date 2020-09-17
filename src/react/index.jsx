@@ -13,10 +13,10 @@ import {
 } from "react-router-dom";
 import styled, { createGlobalStyle, ThemeProvider, ThemeContext } from "styled-components";
 
-import NewCard from "./NewCard";
-import DatePicker from "./DatePicker";
-import { TitleElement, TitledContent } from "./Layout";
-import { SampleResult } from "./GetResults";
+import NewCard from "./NewCard/NewCard";
+import DatePicker from "./NewCard/DatePicker";
+import { TitleElement, TitledContent } from "./NewCard/Layout";
+import { SampleResult } from "./NewCard/GetResults";
 import { ClassicSample } from "./cards/Sample";
 
 const NavElement = styled.nav`
