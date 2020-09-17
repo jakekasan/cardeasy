@@ -19,6 +19,9 @@ import { TitleElement, TitledContent } from "./NewCard/Layout";
 import { SampleResult } from "./NewCard/GetResults";
 import { ClassicSample } from "./cards/Sample";
 
+import About from "./About/About";
+import Welcome from "./Welcome";
+
 const NavElement = styled.nav`
     background-color: ${props => props.theme.colors.dark.primary};
     width: ${props => props.theme.appWidth}px;
@@ -191,6 +194,8 @@ const Main = styled.main`
     margin: 0 auto;
     padding: 10px;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 `;
 
 const Sample = () => {
@@ -212,8 +217,10 @@ const App = () => {
                 <Header />
                 <Main>
                     <Switch>
-                        <Route exact path="/" component={ PlaceHolder }/>
+                        <Route exact path="/" component={ Welcome }/>
                         <Route path="/new" component={ NewCard }/>
+                        <Route path="/about" component={ About }/>
+                        <Route path="/sign" component={ PlaceHolder } />
                         <Route path="/datepicker" component={ DatePicker } />
                         <Route path="/sample" component={ Sample } />
                     </Switch>
