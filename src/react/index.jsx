@@ -16,6 +16,8 @@ import styled, { createGlobalStyle, ThemeProvider, ThemeContext } from "styled-c
 import NewCard from "./NewCard";
 import DatePicker from "./DatePicker";
 import { TitleElement, TitledContent } from "./Layout";
+import { SampleResult } from "./GetResults";
+import { ClassicSample } from "./cards/Sample";
 
 const NavElement = styled.nav`
     background-color: ${props => props.theme.colors.dark.primary};
@@ -191,6 +193,14 @@ const Main = styled.main`
     flex-grow: 1;
 `;
 
+const Sample = () => {
+    return (
+        <SampleResult>
+            <ClassicSample />
+        </SampleResult>
+    )
+}
+
 const App = () => {
 
     const theme = useTheme();
@@ -205,6 +215,7 @@ const App = () => {
                         <Route exact path="/" component={ PlaceHolder }/>
                         <Route path="/new" component={ NewCard }/>
                         <Route path="/datepicker" component={ DatePicker } />
+                        <Route path="/sample" component={ Sample } />
                     </Switch>
                 </Main>
             </ThemeProvider>
