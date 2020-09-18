@@ -21,6 +21,7 @@ import { ClassicSample } from "./cards/Sample";
 
 import About from "./About/About";
 import Welcome from "./Welcome";
+import SignCard from "./SignCard/SignCard";
 
 const NavElement = styled.nav`
     background-color: ${props => props.theme.colors.dark.primary};
@@ -62,7 +63,6 @@ const HeaderElement = styled.header`
     place-items: center;
     background-color: ${props => props.theme.colors.dark.primary};
 `;
-
 
 const Header = () => {
     return (
@@ -220,7 +220,7 @@ const App = () => {
                         <Route exact path="/" component={ Welcome }/>
                         <Route path="/new" component={ NewCard }/>
                         <Route path="/about" component={ About }/>
-                        <Route path="/sign" component={ PlaceHolder } />
+                        <Route path="/sign" component={ SignCard } />
                         <Route path="/datepicker" component={ DatePicker } />
                         <Route path="/sample" component={ Sample } />
                     </Switch>
