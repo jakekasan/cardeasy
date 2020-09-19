@@ -18,6 +18,7 @@ import DatePicker from "./NewCard/DatePicker";
 import { TitleElement, TitledContent } from "./NewCard/Layout";
 import { SampleResult } from "./NewCard/GetResults";
 import { ClassicSample } from "./cards/Sample";
+import { Session } from "./utils/useSession";
 
 import About from "./About/About";
 import Welcome from "./Welcome";
@@ -213,18 +214,20 @@ const App = () => {
     return (
         <Router>
             <ThemeProvider theme={ theme }>
-                <GlobalStyle />
-                <Header />
-                <Main>
-                    <Switch>
-                        <Route exact path="/" component={ Welcome }/>
-                        <Route path="/new" component={ NewCard }/>
-                        <Route path="/about" component={ About }/>
-                        <Route path="/sign" component={ SignCard } />
-                        <Route path="/datepicker" component={ DatePicker } />
-                        <Route path="/sample" component={ Sample } />
-                    </Switch>
-                </Main>
+                <Session>
+                    <GlobalStyle />
+                    <Header />
+                    <Main>
+                        <Switch>
+                            <Route exact path="/" component={ Welcome }/>
+                            <Route path="/new" component={ NewCard }/>
+                            <Route path="/about" component={ About }/>
+                            <Route path="/sign" component={ SignCard } />
+                            <Route path="/datepicker" component={ DatePicker } />
+                            <Route path="/sample" component={ Sample } />
+                        </Switch>
+                    </Main>
+                </Session>
             </ThemeProvider>
         </Router>
     )
