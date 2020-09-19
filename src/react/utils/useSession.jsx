@@ -1,33 +1,34 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 const SessionContext = React.createContext({});
 
 const useSession = () => {
 
-    const [user, setUser] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userSessionID, setUserSessionID] = useState(undefined);
 
-    const [testCookie, setTestCookie] = useState("");
-
-    const getCookie = (name) => {
-        if (name === "test") {
-            return testCookie
-        }
-    }
-
-    const setCookie = (name, value) => {
-        console.log("setCookie", { name, value });
-        if (name === "test") {
-            setTestCookie(value);
-        }
+    const logMeIn = () => {
+        setUserSessionID("JAKE");
+        console.log("Set userSessionID");
     }
 
     return {
-        getCookie,
-        setCookie
+        userSessionID,
+        logMeIn
     }
 }
 
+const Session = ({ children }) => {
+
+    const { userSessionID, logMeIn } = useSession();
+
+    return (
+        <SessionContext.Provider value={ {userSessionID, logMeIn} }>
+            { children }
+        </SessionContext.Provider>
+    )
+}
+
 export {
-    useSession
+    Session,
+    SessionContext
 }
