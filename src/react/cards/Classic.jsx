@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Card = styled.section`
@@ -61,7 +62,19 @@ const Greeting = ({recipient}) => {
     )
 }
 
-const Collaborator = ({name, message = "No message."} = {}) => {
+Greeting.propTypes = {
+    recipient: PropTypes.shape({
+        name: PropTypes.string
+    })
+}
+
+Greeting.defaultProps = {
+    recipient: {
+        name: "Unknown Person"
+    }
+}
+
+const Collaborator = ({name, message } = {}) => {
     console.log("Collaborator", { name, message})
     return (
         <CollaboratorContainer>
@@ -71,6 +84,15 @@ const Collaborator = ({name, message = "No message."} = {}) => {
     )
 }
 
+Collaborator.propTypes = {
+    name: PropTypes.string,
+    message: PropTypes.string
+}
+
+Collaborator.defaultProps = {
+    message: "No message"
+}
+
 const Classic = ({
     collaborators,
     message,
@@ -78,7 +100,13 @@ const Classic = ({
     sender,
     recipient
 }) => {
-    console.log("collaborators", { collaborators })
+
+    useEffect(() => {
+        console.group("Card");
+        console.log("Data:", {collaborators, message, occasion, sender, recipient});
+        console.groupEnd("Card");
+    }, [collaborators, message, occasion, sender, recipient])
+
     return (
         <Card>
             <Greeting recipient={ recipient } />
@@ -93,6 +121,21 @@ const Classic = ({
             </Signed>
         </Card>
         )
+}
+
+Classic.propTypes = {
+    collaborators: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string,
+        message: PropTypes.string
+    })),
+    message: PropTypes.string,
+    occasion: PropTypes.number,
+    sender: PropTypes.shape({
+        name: PropTypes.string
+    }),
+    recipient: PropTypes.shape({
+        name: PropTypes.string
+    })
 }
 
 export default Classic;
