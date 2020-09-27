@@ -98,6 +98,7 @@ const EditableList = () => {
         <CollaboratorList>
             {
                 collaborators
+                    .push({ name: "", email: ""})
                     .map((item, i) => {
                         return (
                             <Collaborator key={ i }>
@@ -112,7 +113,7 @@ const EditableList = () => {
                                             return (
                                                 <CollaboratorField key={ id }>
                                                     <Input
-                                                        type="text"
+                                                        type={ type }
                                                         id={ id }
                                                         onChange={ (event) => onChange(i, key, event.target.value) }
                                                         value={ value }/>
