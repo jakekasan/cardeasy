@@ -1,6 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
+/* tslist:disable */
 const TitleElement = styled.h2`
     display: grid;
     place-items: center;
@@ -9,6 +9,7 @@ const TitleElement = styled.h2`
     line-height: 2.5rem;
     text-underline-offset: 10px;
 `;
+/* tslint:enable */
 
 const TitledContent = styled.article`
     width: ${props => props.theme.appWidth}px;
