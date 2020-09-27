@@ -1,9 +1,8 @@
 import React, {
     useContext,
-    useState,
-    useReducer,
-    useEffect
+    useState
 } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 
@@ -26,7 +25,6 @@ const usePagination = ({items, onLast = () => {}} = {}) => {
 const PaginationContext = React.createContext({});
 
 const Pagination = ({ children, onLast }) => {
-
     const { goBack, goNext, currentPage } = usePagination({items: children, onLast});
 
     return (
@@ -39,6 +37,14 @@ const Pagination = ({ children, onLast }) => {
         </PaginationContext.Provider>
     )
 }
+
+Pagination.propTypes = {
+    children: PropTypes.oneOf([
+        PropTypes.element,
+        PropTypes.arrayOf(PropTypes.element)
+    ]),
+    onLast: PropTypes.func
+};
 
 const ButtonContainer = styled.div`
     width: ${props => props.theme.appWidth}px;
