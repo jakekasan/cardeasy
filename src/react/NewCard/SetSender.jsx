@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { FormDataStoreContext } from "./FormDataStore";
 import { PaginationContext } from "./Pagination";
@@ -31,7 +32,6 @@ const OffsetLabel = styled.label`
 `;
 
 const Input = ({
-    type,
     name,
     label,
     onChange,
@@ -47,6 +47,14 @@ const Input = ({
             <OffsetLabel htmlFor={name}>{ label }</OffsetLabel>
         </InputDiv>
     )
+}
+
+Input.propTypes = {
+    type: PropTypes.string,
+    name: PropTypes.string,
+    label: PropTypes.string,
+    onChange: PropTypes.func,
+    value: PropTypes.string,
 }
 
 const SetSender = () => {
