@@ -18,11 +18,16 @@ import DatePicker from "./NewCard/DatePicker";
 import { TitleElement, TitledContent } from "./NewCard/Layout";
 import { SampleResult } from "./NewCard/GetResults";
 import { ClassicSample } from "./cards/Sample";
-import { Session } from "./utils/useSession";
+// import { Session } from "./utils/useSession";
 
 import About from "./About/About";
 import Welcome from "./Welcome";
-import SignCard from "./SignCard/SignCard";
+import { NewSignCard } from "./SignCard/SignCard";
+
+// data stuff
+import Session from "./utils/Session";
+import User from "./utils/User";
+
 
 const NavElement = styled.nav`
     background-color: ${props => props.theme.colors.dark.primary};
@@ -215,18 +220,20 @@ const App = () => {
         <Router>
             <ThemeProvider theme={ theme }>
                 <Session>
-                    <GlobalStyle />
-                    <Header />
-                    <Main>
-                        <Switch>
-                            <Route exact path="/" component={ Welcome }/>
-                            <Route path="/new" component={ NewCard }/>
-                            <Route path="/about" component={ About }/>
-                            <Route path="/sign" component={ SignCard } />
-                            <Route path="/datepicker" component={ DatePicker } />
-                            <Route path="/sample" component={ Sample } />
-                        </Switch>
-                    </Main>
+                    <User>
+                        <GlobalStyle />
+                        <Header />
+                        <Main>
+                            <Switch>
+                                <Route exact path="/" component={ Welcome }/>
+                                <Route path="/new" component={ NewCard }/>
+                                <Route path="/about" component={ About }/>
+                                <Route path="/sign" component={ NewSignCard } />
+                                <Route path="/datepicker" component={ DatePicker } />
+                                <Route path="/sample" component={ Sample } />
+                            </Switch>
+                        </Main>
+                    </User>
                 </Session>
             </ThemeProvider>
         </Router>
