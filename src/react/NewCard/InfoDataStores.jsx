@@ -1,5 +1,5 @@
-import { get } from "mongoose";
 import React from "react";
+import PropTypes from "prop-types";
 
 import { DEFAULT_DESIGNS, DEFAULT_OCCASIONS } from "./Data";
 
@@ -8,11 +8,13 @@ export const DataStoreContext = React.createContext({});
 const useDataStore = () => {
 
     const occasions = {
+        
         getAll: () => {
-            return new Promise((res, rej) => {
+            return new Promise((res) => {
                 return res(DEFAULT_OCCASIONS);
             })
         },
+
         getById: (id) => {
             return new Promise((res, rej) => {
                 try {
@@ -29,7 +31,7 @@ const useDataStore = () => {
 
     const designs = {
         getAll: () => {
-            return new Promise((res, rej) => {
+            return new Promise((res) => {
                 return res(DEFAULT_DESIGNS);
             })
         },
@@ -61,6 +63,13 @@ const InfoDataStore = ({ children }) => {
             { children }
         </DataStoreContext.Provider>
     )
+}
+
+InfoDataStore.propTypes = {
+    children: PropTypes.oneOf([
+        PropTypes.element,
+        PropTypes.arrayOf(PropTypes.element)
+    ])
 }
 
 export default InfoDataStore;
