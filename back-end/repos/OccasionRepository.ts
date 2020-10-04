@@ -1,6 +1,6 @@
 import FileRepository from "./FileRepository";
 
-interface IOccasion {
+export interface IOccasion {
     id: string,
     text: string
 }

@@ -1,6 +1,6 @@
 import FileRepository from "./FileRepository";
 
-interface IDesign {
+export interface IDesign {
     id: string,
     text: string
 }

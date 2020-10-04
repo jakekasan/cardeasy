@@ -1,6 +1,6 @@
 import FileRepository from "./FileRepository";
 
-interface ISession {
+export interface ISession {
     id: string,
     userId: string
 }
