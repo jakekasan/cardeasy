@@ -4,7 +4,14 @@ interface HasID {
     id: string
 }
 
-interface K extends HasID {};
+const compareObjs = <T>(a: T, b: T) => {
+    for (let key in a) {
+        if (a[key] !== b[key]) {
+            return false
+        }
+    }
+    return true
+}
 
 class FileRepository<T extends HasID> implements IRepository<T> {
 
@@ -14,6 +21,19 @@ class FileRepository<T extends HasID> implements IRepository<T> {
 
     create(newItem: T): Promise<{}> {
         return new Promise((resolve, reject) => {
+
+            // if the object is already in the database, return the existing ID
+            let existing = this
+                            .data
+                            .find(item => compareObjs(newItem, item));
+
+            if (existing) {
+                return resolve({
+                    status: "ok",
+                    message: `Item already exists in the database`,
+                    id: existing.id
+                })
+            }
             if (this.validate(newItem)) {
                 let newId = this.data.length;
                 this.data.push({...newItem, id: newId})
