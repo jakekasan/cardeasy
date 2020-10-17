@@ -200,7 +200,8 @@ const Dashboard = () => {
         <DashboardWelcome>Welcome, { name }</DashboardWelcome>
         <CardList>
             {
-                cards.map(card => <CardListItem key={ card.id }><FetchableCard id={ card.id }/></CardListItem>)
+                cards && cards || []
+                            .map(card => <CardListItem key={ card.id }><FetchableCard id={ card.id }/></CardListItem>)
             }
         </CardList>
         </>
