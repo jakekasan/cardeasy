@@ -78,27 +78,25 @@ const EditableList = () => {
     const { get, set } = useContext(StoreContext);
     const [collaborators, setCollaborators] = useState(() => {
         let currentCollabs = get("collaborators");
-        return fixCollabs(currentCollabs);
+        return filterEmptyCollabs(currentCollabs);
     })
 
     useEffect(() => {
-        console.log({collaborators});
         return () => set("collaborators", collaborators)
     }, [collaborators]);
 
     const onChange = (i, type, value) => {
         setCollaborators(collabs => {
-            collabs[i][type] = value;
-            let newCollabs = filterEmptyCollabs(collabs);
-            return newCollabs
+            let { name, email } = { ...(collabs[i] ?? {name: "", email: ""}), [type]: value };
+            collabs[i] = { name , email};
+            return filterEmptyCollabs(collabs);
         })
     }
 
     return (
         <CollaboratorList>
             {
-                collaborators
-                    .push({ name: "", email: ""})
+                fixCollabs(collaborators)
                     .map((item, i) => {
                         return (
                             <Collaborator key={ i }>
