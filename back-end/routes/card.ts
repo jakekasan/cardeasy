@@ -6,13 +6,10 @@ const Card = Router();
 Card.get("/", (req: Request, res: Response, next: NextFunction) => {
 
     console.log("Card.get")
-    // res.json({
-    //     status: "OK"
-    // })
 
     const { query } = req;
 
-    if (query) {
+    if (query && query.id) {
         console.log("Card.getById", { query });
         
         cardRepo.getById(query.id as string)
@@ -30,9 +27,6 @@ Card.get("/", (req: Request, res: Response, next: NextFunction) => {
 Card.post("/", (req: Request, res: Response, next: NextFunction) => {
 
     console.log("Card.post");
-    // res.json({
-    //     status: "OK"
-    // })
 
     const { body } = req;
 
