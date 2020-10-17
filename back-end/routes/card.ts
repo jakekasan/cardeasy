@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express";
-import { cardRepo } from "../repos";
+import { cardRepo, userRepo, designRepo, occasionRepo } from "../repos";
 
 const Card = Router();
 
@@ -13,7 +13,22 @@ Card.get("/", (req: Request, res: Response, next: NextFunction) => {
         console.log("Card.getById", { query });
         
         cardRepo.getById(query.id as string)
-            .then(data => res.json(data))
+            .then(cardData => {
+                Promise.all([
+                    Promise.all(cardData.collaborators.map(userId => userRepo.getById(userId)))
+                        .then(collaborators => {
+                            return { collaborators }
+                        }),
+                    userRepo.getById(cardData.recipient).then(user => ({recipient: user})),
+                    userRepo.getById(cardData.sender).then(user => ({sender: user})),
+                    designRepo.getById(cardData.design).then(design => ({ design: design })),
+                    occasionRepo.getById(cardData.occasion).then(occasion => ({ occasion: occasion }))
+                ])
+                    .then(data => {
+                        res.json(Object.assign({}, cardData, ...data))
+                    })
+                    .catch(e => next(e))
+            })
             .catch(e => next(e));
     } else {
         console.log("Card.getAll");
@@ -31,11 +46,6 @@ Card.post("/", (req: Request, res: Response, next: NextFunction) => {
     const { body } = req;
 
     res.json(body);
-
-    // cardRepo.create(body)
-    //     .then((result) => res.json(result))
-    //     .catch(e => next(e));
-
 })
 
 export default Card;
